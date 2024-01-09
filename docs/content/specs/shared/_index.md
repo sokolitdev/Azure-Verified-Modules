@@ -60,6 +60,11 @@ This section includes **shared, functional requirements (SFR)** for Bicep an Ter
 
 #### ID: SFR1 - Category: Composition - Preview Services
 
+{{< hint type=danger >}}
+REVIEW.
+Proposal: keep
+{{< /hint >}}
+
 Modules **MAY** create/adopt public preview services and features at their discretion.
 
 Preview API versions **MAY** be used when:
@@ -82,6 +87,11 @@ However, they **MAY** be exposed at the module owners discretion, but the follow
 <br>
 
 #### ID: SFR2 - Category: Composition - WAF Aligned
+
+{{< hint type=danger >}}
+REVIEW.
+Proposal: keep
+{{< /hint >}}
 
 Modules **SHOULD** align to Well-Architected Framework (WAF) pillar recommendations, alongside Microsoft Cloud Security Benchmark (MCSB) and Microsoft Defender for Cloud (MDFC), where appropriate and applicable.
 
