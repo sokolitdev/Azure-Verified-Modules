@@ -8,6 +8,7 @@ url: /specs/shared/team-definitions/
 {{< toc >}}
 
 ## Teams
+
 In AVM there will be multiple different teams involved throughout the initiatives lifecycle and ongoing long-term support. These teams will be listed below alongside their definitions.
 
 {{< hint type=important >}}
@@ -19,6 +20,14 @@ Individuals can be members of multiple teams, at once, that are defined below.
 <br>
 
 ### AVM Core Team
+
+{{< hint type=danger >}}
+REVIEW.
+Proposal:
+
+- keep
+- change the core group to the repo maintaner group
+{{< /hint >}}
 
 GitHub Team: [`@Azure/avm-core-team`](https://github.com/orgs/Azure/teams/avm-core-team)
 
@@ -41,6 +50,11 @@ The team is made up of both technical and non-technical team members that are al
 
 ### Module Owners
 
+{{< hint type=danger >}}
+REVIEW.
+Proposal: keep, but allow any group to be an owner, and remove reference to GitHub org
+{{< /hint >}}
+
 {{< hint type=important >}}
 
 Today, module owners **MUST** be Microsoft FTEs. This is to ensure that within AVM the long-term support for each module can be upheld and honoured.
@@ -61,6 +75,11 @@ Ideally there **SHOULD** be at least 2 module owners per module and **MUST** be 
 
 ### Module Contributors
 
+{{< hint type=danger >}}
+REVIEW.
+Proposal: keep, but allow any group to be an contributor, and remove reference to GitHub org
+{{< /hint >}}
+
 {{< hint type=important >}}
 
 Module Contributors can be anyone in any organization. However, they must be an active contributor and supporting the Module Owners.
@@ -76,6 +95,11 @@ Module Contributors **MUST** be in a separate [GitHub Team in the `Azure` organi
 <br>
 
 ### Product Groups
+
+{{< hint type=danger >}}
+REVIEW.
+Proposal: remove
+{{< /hint >}}
 
 GitHub Teams:
 
