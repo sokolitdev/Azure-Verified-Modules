@@ -19,8 +19,19 @@ Every module needs a module proposal to be created in the AVM repository. This a
 {{< /hint >}}
 
 {{< hint type=tip >}}
-- To look for items that **need triaging**, click on the following link to use this saved query ➡️ <a href="https://aka.ms/AVM/NeedsTriage"><mark style="background-color:#FBCA04;">Needs: Triage 🔍</mark></a> ⬅️.
-- To look for items that **need attention**, click on the following link to use this saved query ➡️ <a href="https://aka.ms/AVM/NeedsAttention"><mark style="background-color:#E99695;color:white;">Needs: Attention 👋</mark></a> ⬅️.
+During the triage process, the AVM Core Team should also check the status of following queries:
+
+- Open items that **need triaging**: <a href="https://aka.ms/AVM/NeedsTriage"><mark style="background-color:#FBCA04;">Needs: Triage 🔍</mark></a>
+  - Bicep items (that need triaging): <a href="https://aka.ms/AVM/NeedsTriageBicep"><mark style="background-color:#1D73B3;color:white;">Language: Bicep 💪</mark> & <mark style="background-color:#FBCA04;">Needs: Triage 🔍</mark></a>
+  - Terraform items (that need triaging): <a href="https://aka.ms/AVM/NeedsTriageTerraform"><mark style="background-color:#7740B6;color:white;">Language: Terraform 🌐</mark> & <mark style="background-color:#FBCA04;">Needs: Triage 🔍</mark></a>
+- Open items that **need triaging AND aren't being triaged yet**: <a href="https://aka.ms/AVM/NeedsTriageButNotInTriage"><mark style="background-color:#FBCA04;">Needs: Triage 🔍</mark> & <mark style="background-color:#E4E669;">Status: In Triage 🔍</mark></a>
+- Open items that **need attention**: <a href="https://aka.ms/AVM/NeedsAttention"><mark style="background-color:#E99695;">Needs: Attention 👋</mark></a>
+- Open items that **need owners**: <a href="https://aka.ms/AVM/NeedsModuleOwner"><mark style="background-color:#FF0019;color:white;">Needs: Module Owner 📣</mark></a>
+- Open items with **no recent activity**: <a href="https://aka.ms/AVM/NoRecentActivity"><mark style="background-color:#808080;color:white;">Status: No Recent Activity 💤</mark></a>
+- Open **question/feedback** items: <a href="https://aka.ms/AVM/QuestionsFeedback"><mark style="background-color:#CB6BA2;color:white;">Type: Question/Feedback 🙋‍♀️</mark></a>
+- Open items with **long term** status: <a href="https://aka.ms/AVM/StatusLongTerm"><mark style="background-color:#B60205;color:white;">Status: long-term ⏳</mark></a>
+- Open items that are <a href="https://aka.ms/AVM/NotInAProject">**not in a project**</a>.
+
 {{< /hint >}}
 
 <br>
@@ -98,14 +109,13 @@ You **MUST** still confirm that the requestor is a Microsoft FTE and that they u
 
 {{< hint type=important >}}
 
-Although, it's not directly part of the module proposal triage process, to begin development, module owners and contributors will need additional help from the AVM core team, such as:
+Although, it's not directly part of the module proposal triage process, to begin development, module owners and contributors might need additional help from the AVM core team, such as:
 
 1. Update any Azure RBAC permissions for test tenants/subscription, if needed.
 2. In case of **Bicep modules** only:
-    - Look for the module owners confirmation on the related `[Module Proposal]` issue that they have created the required `-module-owners-` and `-module-owners-` GitHub teams.
-    - Grant the necessary permissions to the `-module-owners-` and `-module-owners-` teams on the [BRM repo](https://aka.ms/BRM) as described [here](https://azure.github.io/Azure-Verified-Modules/specs/shared/#grant-permissions---bicep).
-    - Update [`CODEOWNERS`](https://github.com/Azure/bicep-registry-modules/blob/main/.github/CODEOWNERS) file in the [BRM repo](https://aka.ms/BRM).
-    - When ready, on the related issue, confirm that you have granted the necessary permissions to the GitHub teams and updated the `CODEOWNERS` file.
+    - Look for the module owners confirmation on the related `[Module Proposal]` issue that they have created the required `-module-owners-` and `-module-contributors-` GitHub teams.
+    - Ensure the `-module-owners-` and `-module-contributors-` GitHub teams have been assigned to their respective parent teams as outlined [here](https://azure.github.io/Azure-Verified-Modules/specs/shared/#grant-permissions---bicep).
+    - Ensure the [`CODEOWNERS`](https://github.com/Azure/bicep-registry-modules/blob/main/.github/CODEOWNERS) file in the [BRM repo](https://aka.ms/BRM) has been updated.
 
 {{< /hint >}}
 

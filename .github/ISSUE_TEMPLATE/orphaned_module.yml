@@ -1,6 +1,6 @@
 name: Orphaned AVM Module 👀
 description: An existing AVM module has just become orphaned and needs a new owner
-title: "[Orphaned Module]: `MODULE NAME BETWEEN BACKTICKS`"
+title: "[Orphaned Module]: `MODULE_NAME_BETWEEN_BACKTICKS`"
 labels: ["Status: Module Orphaned :eyes:", "Needs: Module Owner :mega:", "Needs: Triage :mag:"]
 projects: ["Azure/529"]
 body:
@@ -73,3 +73,10 @@ body:
       description: Please provide the secondary module owner's GitHub username, leave blank if unknown!
     validations:
       required: false
+  - type: markdown
+    attributes:
+      value: |
+        > **NOTE**:
+        >
+        > - This Orphaned Module issue **MUST remain open** until the ownership is fully confirmed!
+        > - Once the Orphaned Module issue was closed, it **MUST remain closed**. If the module will subsequently become orphaned again, a new Orphaned Module issue must be opened.
