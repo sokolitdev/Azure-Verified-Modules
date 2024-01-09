@@ -61,6 +61,11 @@ This section includes **shared, functional requirements (SFR)** for Bicep an Ter
 
 #### ID: SFR1 - Category: Composition - Preview Services
 
+{{< hint type=danger >}}
+REVIEW.
+Proposal: keep
+{{< /hint >}}
+
 Modules **MAY** create/adopt public preview services and features at their discretion.
 
 Preview API versions **MAY** be used when:
@@ -84,14 +89,12 @@ However, they **MAY** be exposed at the module owners discretion, but the follow
 
 #### ID: SFR2 - Category: Composition - WAF Aligned
 
-Modules **SHOULD** set defaults in input parameters/variables to align to **high** priority/impact recommendations, where appropriate and applicable, in the following frameworks and resources:
+{{< hint type=danger >}}
+REVIEW.
+Proposal: keep
+{{< /hint >}}
 
-- [Well-Architected Framework (WAF)](https://learn.microsoft.com/azure/well-architected/what-is-well-architected-framework)
-- [Reliability Hub](https://learn.microsoft.com/azure/reliability/overview-reliability-guidance)
-- [Azure Proactive Resiliency Library (APRL)](https://aka.ms/aprl)
-  - *Only Product Group (PG) verified*
-- [Microsoft Cloud Security Benchmark (MCSB)](https://learn.microsoft.com/security/benchmark/azure/introduction)
-- [Microsoft Defender for Cloud (MDFC)](https://learn.microsoft.com/en-us/azure/defender-for-cloud/recommendations-reference)
+Modules **SHOULD** align to Well-Architected Framework (WAF) pillar recommendations, alongside Microsoft Cloud Security Benchmark (MCSB) and Microsoft Defender for Cloud (MDFC), where appropriate and applicable.
 
 They **SHOULD NOT** align to these recommendations when it requires an external dependency/resource to be deployed and configured and then associated to the resources in the module.
 
