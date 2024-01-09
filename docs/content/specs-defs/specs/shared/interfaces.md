@@ -14,6 +14,11 @@ Below are the interfaces/schemas for the AVM Resource Modules features/extension
 
 ## Diagnostic Settings
 
+{{< hint type=danger >}}
+REVIEW.
+Proposal: specify currently known categories, but keep it available to add additional values when using the module.
+{{< /hint >}}
+
 {{< hint type=important >}}
 
 Allowed values for logs and metric categories or category groups **MUST NOT** be specified to keep the module implementation evergreen for any new categories or category groups added by RPs, without module owners having to update a list of allowed values and cut a new release of their module.
@@ -181,6 +186,15 @@ In Terraform, locks become part of the resource graph and suitable `depends_on` 
 
 **Notes:**
 
+{{< hint type=danger >}}
+REVIEW.
+Proposal:
+
+- keep
+- change the contact group to the repo maintaner.
+- owners SHOULD define list of allowed values for groupIds, but keep it open for additions by consumers
+{{< /hint >}}
+
 - The properties defined in the schema above are the minimum amount of properties expected to be exposed for Private Endpoints in AVM Resource Modules.
   - A module owner **MAY** chose to expose additional properties of the Private Endpoint resource
     - However, module owners considering this **SHOULD** contact the AVM core team first to consult on how the property should be exposed to avoid future breaking changes to the schema that may be enforced upon them
@@ -210,6 +224,14 @@ In Terraform, locks become part of the resource graph and suitable `depends_on` 
 <br>
 
 ## Azure Monitor Alerts
+
+{{< hint type=danger >}}
+REVIEW.
+Proposal:
+
+- keep
+- change the contact group to the repo maintaner
+{{< /hint >}}
 
 {{< hint type=note >}}
 
