@@ -7,13 +7,13 @@ geekdocAnchor: true
 
 {{< hint type=important >}}
 
-**This initiative is still in development!** Please review and leave issues on things you find, via [GitHub Issues](https://github.com/Azure/Azure-Verified-Modules/issues) 👍
+**This initiative is still in development!** Please review and leave issues on things you find, via [GitHub Issues](https://github.com/sokolitdev/Azure-Verified-Modules/issues) 👍
 
 {{< /hint >}}
 
 {{< hint type=tip >}}
 
-Before submitting a new [module proposal](https://aka.ms/avm/moduleproposal) for either Bicep or Terraform, please review the FAQ section on ["CARML/TFVM to AVM Evolution Details"](/Azure-Verified-Modules/faq/#carmltfvm-to-avm-evolution-details)!
+Before submitting a new module proposal for either Bicep or Terraform, please review the FAQ section on ["CARML/TFVM to AVM Evolution Details"](/Azure-Verified-Modules/faq/#carmltfvm-to-avm-evolution-details)!
 
 {{< /hint >}}
 

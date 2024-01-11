@@ -5,6 +5,11 @@ geekdocAlign: left
 geekdocAnchor: true
 ---
 
+{{< hint type=danger >}}
+REVIEW. AGREED.
+Proposal: keep
+{{< /hint >}}
+
 AVM defines two module classifications, **Resource Modules** and **Pattern Modules**, that can be created, published, and consumed, these are defined further in the table below:
 
 | Module Classification | Definition | Who is it for? |
