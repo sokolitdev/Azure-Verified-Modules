@@ -6,7 +6,7 @@ geekdocAnchor: true
 ---
 
 {{< hint type=danger >}}
-REVIEW.
+REVIEW. AGREED.
 Proposal: keep
 {{< /hint >}}
 
