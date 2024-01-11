@@ -54,7 +54,7 @@ This section includes **Bicep specific, functional requirements (BCPFR)** for AV
 #### ID: BCPFR1 - Category: Composition - Cross-Referencing Modules
 
 {{< hint type=danger >}}
-REVIEW.
+REVIEW. AGREED.
 Proposal: keep
 {{< /hint >}}
 
@@ -75,7 +75,7 @@ Modules **MUST NOT** contain references to non-AVM modules.
 #### ID: BCPFR2 - Category: Composition - Role Assignments Role Definition Mapping
 
 {{< hint type=danger >}}
-REVIEW.
+REVIEW. AGREED.
 Proposal: keep
 {{< /hint >}}
 
@@ -96,8 +96,8 @@ To meet the requirements of [BCPFR2](/Azure-Verified-Modules/specs/bicep/#id-bcp
 #### ID: BCPFR4 - Category: Composition - Telemetry Enablement
 
 {{< hint type=danger >}}
-REVIEW.
-Proposal: keep, but change the prefix 46d3xbcp
+REVIEW. AGREED.
+Proposal: keep, but change the prefix 46d3xbcp + add the prefix (example, 'handledByAvm') as additional tag in every resource/pattern module
 {{< /hint >}}
 
 To meet the requirements of [SFR3](/Azure-Verified-Modules/specs/shared/#id-sfr3---category-telemetry---deploymentusage-telemetry) & [SFR4](/Azure-Verified-Modules/specs/shared/#id-sfr4---category-telemetry---telemetry-enablement-flexibility) you **MUST** use the below code sample in your AVM Modules to achieve this.
@@ -123,7 +123,7 @@ This section includes **Bicep specific, non-functional requirements (BCPNFR)** f
 #### ID: BCPNFR1 - Category: Inputs - Data Types
 
 {{< hint type=danger >}}
-REVIEW.
+REVIEW. AGREED.
 Proposal: keep, but remove paragraphs about CARML
 {{< /hint >}}
 
@@ -154,7 +154,7 @@ Therefore it has been decided by the AVM core team that CARML modules initial mi
 #### ID: BCPNFR7 - Category: Inputs - Parameter Requirement Types
 
 {{< hint type=danger >}}
-REVIEW.
+REVIEW. AGREED.
 Proposal: keep
 {{< /hint >}}
 
@@ -176,7 +176,7 @@ Modules will have lots of parameters that will differ in their requirement type 
 #### ID: BCPNFR2 - Category: Documentation - Module Documentation Generation
 
 {{< hint type=danger >}}
-REVIEW.
+REVIEW. AGREED.
 Proposal: keep for now, removing reference to AVM team, and reassess later
 {{< /hint >}}
 
@@ -206,7 +206,7 @@ Bicep modules documentation **MUST** be automatically generated via the provided
 #### ID: BCPNFR3 - Category: Documentation - Usage Example formats
 
 {{< hint type=danger >}}
-REVIEW.
+REVIEW. AGREED.
 Proposal: keep, adjust module naming removing 'avm/', removing reference to AVM team
 {{< /hint >}}
 
@@ -248,7 +248,7 @@ Bicep Parameter Files (`.bicepparam`) are being reviewed and considered by the A
 #### ID: BCPNFR4 - Category: Documentation - Parameter Input Examples
 
 {{< hint type=danger >}}
-REVIEW.
+REVIEW. AGREED.
 Proposal: keep
 {{< /hint >}}
 
@@ -288,7 +288,7 @@ It is planned that these examples are automatically added to the module readme's
 #### ID: BCPNFR5 - Category: Composition - Role Assignments Role Definition Mapping Limits
 
 {{< hint type=danger >}}
-REVIEW.
+REVIEW. AGREED.
 Proposal: keep
 {{< /hint >}}
 
@@ -319,7 +319,7 @@ Review the [Bicep Contribution Guide's 'RBAC Role Definition Name Mapping' secti
 #### ID: BCPNFR6 - Category: Composition - Role Assignments Role Definition Mapping Compulsory Roles
 
 {{< hint type=danger >}}
-REVIEW.
+REVIEW. AGREED.
 Proposal: keep
 {{< /hint >}}
 
@@ -346,7 +346,7 @@ Review the [Bicep Contribution Guide's 'RBAC Role Definition Name Mapping' secti
 #### ID: BCPNFR8 - Category: Composition - Code Styling - lower camelCasing
 
 {{< hint type=danger >}}
-REVIEW.
+REVIEW. AGREED.
 Proposal: keep
 {{< /hint >}}
 
@@ -370,7 +370,7 @@ For example: `camelCasingExample` (lowercase first word (entirely), with capital
 #### ID: BCPNFR14 - Category: Composition - Versioning
 
 {{< hint type=danger >}}
-REVIEW.
+REVIEW. AGREED.
 Proposal: keep
 {{< /hint >}}
 
@@ -390,7 +390,7 @@ For example, the `version` value should be:
 #### ID: BCPNFR9 - Category: Testing - Expected Test Directories
 
 {{< hint type=danger >}}
-REVIEW.
+REVIEW. AGREED.
 Proposal: keep
 {{< /hint >}}
 
@@ -413,7 +413,7 @@ Module owners **MUST** create the `defaults`, `waf-aligned` folders within their
 #### ID: BCPNFR10 - Category: Testing - Test Bicep File Naming
 
 {{< hint type=danger >}}
-REVIEW.
+REVIEW. AGREED.
 Proposal: keep
 {{< /hint >}}
 
@@ -428,7 +428,7 @@ Module owners **MUST** name their test `.bicep` files in the `/tests/e2e/<defaul
 #### ID: BCPNFR11 - Category: Testing - Test Tooling
 
 {{< hint type=danger >}}
-REVIEW.
+REVIEW. AGREED.
 Proposal: keep
 {{< /hint >}}
 
@@ -447,7 +447,7 @@ Module owners **MUST** use the below tooling for unit/linting/static/security an
 #### ID: BCPNFR12 - Category: Testing - Deployment Test Naming
 
 {{< hint type=danger >}}
-REVIEW.
+REVIEW. AGREED.
 Proposal: keep
 {{< /hint >}}
 
@@ -491,7 +491,7 @@ The syntax is used by the ReadMe-generating utility to identify, pull & format u
 #### ID: BCPNFR13 - Category: Testing - Test file metadata
 
 {{< hint type=danger >}}
-REVIEW.
+REVIEW. AGREED.
 Proposal: keep
 {{< /hint >}}
 
