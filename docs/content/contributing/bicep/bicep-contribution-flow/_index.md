@@ -10,43 +10,49 @@ geekdocAnchor: true
 ## High-level contribution flow
 
 {{< mermaid class="text-center" >}}
-  flowchart TD
-    A(<a href='/Azure-Verified-Modules/contributing/bicep/bicep-contribution-flow/#1-setup-your-azure-test-environment'>1. Setup your Azure test environment </a>)
-    B(<a href='/Azure-Verified-Modules/contributing/bicep/bicep-contribution-flow/#1-setup-your-azure-test-environment'>2. Fork the module source repository</a>)
-    C(<a href='/Azure-Verified-Modules/contributing/bicep/bicep-contribution-flow/#3-configure-your-ci-environment'>3. Configure CI environment </a> <br> For module tests)
-    D(<a href='/Azure-Verified-Modules/contributing/bicep/bicep-contribution-flow/#4-implement-your-contribution'>4. Implementing your contribution </a><br> Refer to Gitflow Diagram below)
-    E{<a href='/Azure-Verified-Modules/contributing/bicep/bicep-contribution-flow/#5-createupdate-and-run-tests'>5. Workflow test <br> completed <br> successfully?</a>}
-    F(<a href='/Azure-Verified-Modules/contributing/bicep/bicep-contribution-flow/#6-create-a-pull-request-to-the-public-bicep-registry'>6. Create a pull request to the upstream repository</a>)
-    A --> B
-    B --> C
-    C --> D
-    D --> E
-    E -->|yes|F
-    E -->|no|D
+flowchart TD
+A(1. Setup your Azure test environment)
+  click A "/Azure-Verified-Modules/contributing/bicep/bicep-contribution-flow/#1-setup-your-azure-test-environment"
+B(2. Fork the module source repository)
+  click B "/Azure-Verified-Modules/contributing/bicep/bicep-contribution-flow/#2-fork-the-module-source-repository"
+C(3. Configure CI environment <br> For module tests)
+  click C "/Azure-Verified-Modules/contributing/bicep/bicep-contribution-flow/#3-configure-your-ci-environment"
+D(4. Implementing your contribution<br> Refer to Gitflow Diagram below)
+  click D "/Azure-Verified-Modules/contributing/bicep/bicep-contribution-flow/#4-implement-your-contribution"
+E{5. Workflow test <br> completed <br> successfully?}
+  click E "/Azure-Verified-Modules/contributing/bicep/bicep-contribution-flow/#5-createupdate-and-run-tests"
+F(6. Create a pull request to the upstream repository)
+  click F "/Azure-Verified-Modules/contributing/bicep/bicep-contribution-flow/#6-create-a-pull-request-to-the-public-bicep-registry"
+A --> B
+B --> C
+C --> D
+D --> E
+E -->|yes|F
+E -->|no|D
 {{< /mermaid >}}
 
 ## GitFlow for contributors
 
 The GitFlow process outlined here introduces a central anchor branch. This branch should be treated as if it were a protected branch. It serves to synchronize the forked repository with the original upstream repository. The use of the anchor branch is designed to give contributors the flexibility to work on several modules simultaneous.
 {{< mermaid class="text-center" >}}
-  %%{init: { 'logLevel': 'debug', 'gitGraph': {'rotateCommitLabel': false}} }%%
-  gitGraph LR:
-      commit id:"Fork Repo"
-      branch anchor
-      checkout anchor
-      commit id:"Sync Upstream/main" type: HIGHLIGHT
-      branch avm-type-provider-resource-workflow
-      checkout avm-type-provider-resource-workflow
-      commit id:"Add Workflow File for Resource/Pattern"
-      branch avm-type-provider-resource
-      checkout main
-      merge avm-type-provider-resource-workflow id: "merge workflow for GitHub Actions Testing" type: HIGHLIGHT
-      checkout avm-type-provider-resource
-      commit id:"Init"
-      commit id:"Patch 1"
-      commit id:"Patch 2"
-      checkout main
-      merge avm-type-provider-resource
+%%{init: { 'logLevel': 'debug', 'gitGraph': {'rotateCommitLabel': false}} }%%
+gitGraph LR:
+commit id:"Fork Repo"
+branch anchor
+checkout anchor
+commit id:"Sync Upstream/main" type: HIGHLIGHT
+branch avm-type-provider-resource-workflow
+checkout avm-type-provider-resource-workflow
+commit id:"Add Workflow File for Resource/Pattern"
+branch avm-type-provider-resource
+checkout main
+merge avm-type-provider-resource-workflow id: "merge workflow for GitHub Actions Testing" type: HIGHLIGHT
+checkout avm-type-provider-resource
+commit id:"Init"
+commit id:"Patch 1"
+commit id:"Patch 2"
+checkout main
+merge avm-type-provider-resource
 {{< /mermaid >}}
 
 {{< hint type=tip >}}
@@ -61,19 +67,19 @@ When implementing the GitFlow process as described, it is advisable to configure
 
 {{< hint type=note >}}
 
-Each time in the following sections we refer to 'your xzy', it is an indicator that you have to change something in your own environment.
+Each time in the following sections we refer to 'your xyz', it is an indicator that you have to change something in your own environment.
 
 {{< /hint >}}
-
 
 AVM tests the deployments in an Azure subscription. To do so, it requires a service principal with access to it.
 
 In this first step, make sure you
+
 - Have/create an Azure Active Directory Service Principal with at least `Contributor` & `User Access Administrator` permissions on the Management-Group/Subscription you want to test the modules in. You might find the following links useful:
-  - [Create a service principal (Azure Portal)](https://learn.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal)
-  - [Create a service principal (PowerShell)](https://learn.microsoft.com/azure/active-directory/develop/howto-authenticate-service-principal-powershell)
-  - [Find Service Principal object ID](https://learn.microsoft.com/azure/cost-management-billing/manage/assign-roles-azure-service-principals#find-your-spn-and-tenant-id)
-  - [Find managed Identity Service Principal](https://learn.microsoft.com/azure/active-directory/managed-identities-azure-resources/how-to-view-managed-identity-service-principal-portal)
+  - [Create a service principal (Azure Portal)](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal)
+  - [Create a service principal (PowerShell)](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-authenticate-service-principal-powershell)
+  - [Find Service Principal object ID](https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/assign-roles-azure-service-principals#find-your-spn-and-tenant-id)
+  - [Find managed Identity Service Principal](https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/how-to-view-managed-identity-service-principal-portal)
 - Note down the following pieces of information
   - Application (Client) ID
   - Service Principal Object ID (**not** the object ID of the application)
@@ -97,6 +103,7 @@ To do so, simply navigate to the [Public Bicep Registry](https://github.com/Azur
 ## 3. Configure your CI environment
 
 To configure the forked CI environment you have to perform several steps:
+
 - [3.1 Set up secrets](#31-set-up-secrets)
 - [3.2 Enable actions](#32-enable-actions)
 - [3.3 Set Read/Write Workflow permissions](#33-set-readwrite-workflow-permissions)
@@ -107,11 +114,11 @@ To use the environment's pipelines you should use the information you gathered d
 
 | Secret Name           | Example                                                                                                                                                                                                | Description                                                                                                                                                                                                                                                                                |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `ARM_MGMTGROUP_ID`    | `11111111-1111-1111-1111-111111111111`                                                                                                                                                                 | The group ID of the management group to test-deploy modules in.                                                                                                                                                                                                                            |
-| `ARM_SUBSCRIPTION_ID` | `22222222-2222-2222-2222-222222222222`                                                                                                                                                                 | The ID of the subscription to test-deploy modules in.                                                                                                                                                                                                                                      |
-| `ARM_TENANT_ID`       | `33333333-3333-3333-3333-333333333333`                                                                                                                                                                 | The tenant ID of the Azure Active Directory tenant to test-deploy modules in.                                                                                                                                                                                                              |
+| `ARM_MGMTGROUP_ID`    | `11111111-1111-1111-1111-111111111111`                                                                                                                                                                 | The group ID of the management group to test-deploy modules in. Is needed for resources that are deployed to the management group scope.                                                                                                                                                   |
+| `ARM_SUBSCRIPTION_ID` | `22222222-2222-2222-2222-222222222222`                                                                                                                                                                 | The ID of the subscription to test-deploy modules in. Is needed for resources that are deployed to the subscription scope.                                                                                                                                                                 |
+| `ARM_TENANT_ID`       | `33333333-3333-3333-3333-333333333333`                                                                                                                                                                 | The tenant ID of the Azure Active Directory tenant to test-deploy modules in. Is needed for resources that are deployed to the tenant scope.                                                                                                                                               |
 | `AZURE_CREDENTIALS`   | `{"clientId": "44444444-4444-4444-4444-444444444444", "clientSecret": "<placeholder>", "subscriptionId": "22222222-2222-2222-2222-222222222222", "tenantId": "33333333-3333-3333-3333-333333333333" }` | The login credentials of the deployment principal used to log into the target Azure environment to test in. The format is described [here](https://github.com/Azure/login#configure-deployment-credentials). For more information, see the `[Special case: AZURE_CREDENTIALS]` note below. |
-| `TOKEN_NAMEPREFIX`    | `cntso`                                                                                                                                                                                                | Optional. A short (3-5 character length), unique string that should be included in any deployment to Azure. For more information, see the `[Special case: TOKEN_NAMEPREFIX]` note below.                                                                                                   |
+| `TOKEN_NAMEPREFIX`    | `cntso`                                                                                                                                                                                                | Required. A short (3-5 character length), unique string that should be included in any deployment to Azure. Usually, AVM Bicep test cases require this value to ensure no two contributors deploy resources with the same name - which is especially important for resources that require a globally unique name (e.g., Key Vault). These characters will be used as part of each resource's name during deployment. For more information, see the `[Special case: TOKEN_NAMEPREFIX]` note below.                                                                                                   |
 
 <p>
 
@@ -119,15 +126,15 @@ To use the environment's pipelines you should use the information you gathered d
 
 1. Navigate to the repository's `Settings`.
 
-    <img src="../../../img/bicep-ci/forkSettings.png" alt="Navigate to settings" width=100%>
+<img src="../../../img/bicep-ci/forkSettings.png" alt="Navigate to settings" width=100%>
 
 2. In the list of settings, expand `Secrets` and select `Actions`. You can create a new repository secret by selecting `New repository secret` on the top right.
 
-    <img src="../../../img/bicep-ci/forkSettingsSecrets.png" alt="Navigate to secrets" width=100%>
+<img src="../../../img/bicep-ci/forkSettingsSecrets.png" alt="Navigate to secrets" width=100%>
 
 3. In the opening view, you can create a secret by providing a secret `Name`, a secret `Value`, followed by a click on the `Add secret` button.
 
-    <img src="../../../img/bicep-ci/forkSettingsSecretAdd.png" alt="Add secret" width=100%>
+<img src="../../../img/bicep-ci/forkSettingsSecretAdd.png" alt="Add secret" width=100%>
 
 {{< /expand >}}
 
@@ -165,7 +172,7 @@ To do so, perform the following steps:
 
 1. Next, select '`I understand my workflows, go ahead and enable them`'.
 
-    <img src="../../../img/bicep-ci/actionsEnable.png" alt="Enable Actions" width=100%>
+<img src="../../../img/bicep-ci/actionsEnable.png" alt="Enable Actions" width=100%>
 
 ### 3.3. Set Read/Write Workflow permissions
 
@@ -177,9 +184,15 @@ To let the workflow engine publish their results into your repository, you have 
 
 1. Make sure to enable `Read and write permissions`
 
-    <img src="../../../img/bicep-ci/workflow_permissions.png" alt="Workflow Permissions" width=100%>
+<img src="../../../img/bicep-ci/workflow_permissions.png" alt="Workflow Permissions" width=100%>
 
 <br>
+
+{{< hint type=tip >}}
+
+Once you enabled the GitHub actions, your workflows will behave as they do in the upstream repository. This includes a scheduled trigger to continuously check that all modules are working and compliant with the latest tests. However, testing all modules can incur substantial costs with the target subscription. Therefore, we recommend **disabling all workflows of modules you are not working on**. To make this as easy as possible, we created a workflow that disables/enables workflows based on a selected toggle & naming pattern. For more information on how to use this workflow, please refer to the corresponding [documentation](/Azure-Verified-Modules/contributing/bicep/bicep-contribution-flow/enable-or-disable-workflows).
+
+{{< /hint >}}
 
 ## 4. Implement your contribution
 
@@ -189,7 +202,7 @@ If you're working on a new module, we'd also ask you to create its corresponding
 
 {{< expand "➕ Module workflow template" "expand/collapse" >}}
 
-{{< include file="/static/includes/avm.[res-res].template.pattern.yml" language="yaml" options="linenos=false" >}}
+{{< include file="/static/includes/avm.[res-ptn].workflow.template.yml" language="yaml" options="linenos=false" >}}
 
 {{< /expand >}}
 
@@ -207,7 +220,7 @@ Before opening a Pull Request to the Bicep Public Registry, ensure your module i
 
 For example, to meet [SNFR2](/Azure-Verified-Modules/specs/shared/#id-snfr2---category-testing---e2e-testing), ensure the updated module is deployable against a testing Azure subscription and compliant with the intended configuration.
 
-Depending on the type of contribution you implemented (for example, a new module feature) we would kindly ask you to also update the `e2e` test run by the pipeline. For a new parameter this could mean to either add its usage to an existing test file, or to add an entirely new test as per [BCPNFR9](/Azure-Verified-Modules/specs/bicep/#id-bcpnfr9---category-testing---expected-test-directories).
+Depending on the type of contribution you implemented (for example, a new resource module feature) we would kindly ask you to also update the `e2e` test run by the pipeline. For a new parameter this could mean to either add its usage to an existing test file, or to add an entirely new test as per [BCPRMNFR1](/Azure-Verified-Modules/specs/bicep/#id-bcprmnfr1---category-testing---expected-test-directories).
 
 Once the contribution is implemented and the changes are pushed to your forked repository, we kindly ask you to validate your updates in your own cloud environment before requesting to merge them to the main repo. Test your code leveraging the forked AVM CI environment you configured before
 
@@ -219,16 +232,20 @@ In case your contribution involves changes to a module, you can also optionally 
 
 ### Creating `e2e` tests
 
-As per [BCPNFR9](/Azure-Verified-Modules/specs/bicep/#id-bcpnfr9---category-testing---expected-test-directories), the module must contain a minimum set of deployment test cases, but beyond those you're free to implement any additional, meaningful test that you see fit. Each test is implemented in its own test folder, containing at least a `main.test.bicep` and optionally any amount of extra deployment files that you may require (e.g., to deploy dependencies using a `dependencies.bicep` that you reference in the test template file).
+As per [BCPRMNFR1](/Azure-Verified-Modules/specs/bicep/#id-bcprmnfr1---category-testing---expected-test-directories), a resource module must contain a minimum set of deployment test cases, while for pattern modules there is no restriction on the naming each deployment test must have.
+In either case, you're free to implement any additional, meaningful test that you see fit. Each test is implemented in its own test folder, containing at least a `main.test.bicep` and optionally any amount of extra deployment files that you may require (e.g., to deploy dependencies using a `dependencies.bicep` that you reference in the test template file).
 
 To get started implementing your test in the `main.test.bicep` file, we recommend the following guidelines:
 
 - As per [BCPNFR13](/Azure-Verified-Modules/specs/bicep/#id-bcpnfr13---category-testing---test-file-metadata), each `main.test.bicep` file should implement metadata to render the test more meaningful in the documentation
 - The `main.test.bicep` file should deploy any immediate dependencies (e.g., a resource group, if required) and invoke the module's main template while providing all parameters for a given test scenario.
 - Parameters
+
   - Each file should define a parameter `serviceShort`. This parameter should be unique to this file (i.e, no two test files should share the same) as it is injected into all resource deployments, making them unique too and account for corresponding requirements.
+
     - As a reference you can create a identifier by combining a substring of the resource type and test scenario (e.g., in case of a Linux Virtual Machine Deployment: `vmlin`).
     - For the substring, we recommend to take the first character and subsequent 'first' character from the resource type identifier and combine them into one string. Following you can find a few examples for reference:
+
       - `db-for-postgre-sql/flexible-server` with a test folder `default` could be: `dfpsfsdef`
       - `storage/storage-account` with a test folder `waf-aligned` could be: `ssawaf`
 
@@ -237,6 +254,7 @@ To get started implementing your test in the `main.test.bicep` file, we recommen
 
   - If the module deploys a resource-group-level resource, the template should further have a `resourceGroupName` parameter and subsequent resource deployment. As a reference for the default name you can use `dep-<namePrefix><providerNamespace>.<resourceType>-${serviceShort}-rg`.
   - Each file should also provide a `location` parameter that may default to the deployments default location
+
 - It is recommended to define all major resource names in the `main.test.bicep` file as it makes later maintenance easier. To implement this, make sure to pass all resource names to any referenced module (including any resource deployed in the `dependencies.bicep`).
 - Further, for any test file (including the `dependencies.bicep` file), the usage of variables should be reduced to the absolute minimum. In other words: You should only use variables if you must use them in more than one place. The idea is to keep the test files as simple as possible
 - References to dependencies should be implemented using resource references in combination with outputs. In other words: You should not hardcode any references into the module template's deployment. Instead use references such as `nestedDependencies.outputs.managedIdentityPrincipalId`
@@ -292,16 +310,16 @@ To test the numerous diagnostic settings targets (Log Analytics Workspace, Stora
 
 Finally, once you are satisfied with your contribution and validated it, open a PR for the module owners or core team to review. Make sure you:
 
-1. Provide a meaningful title
-1. Provide a meaningful description.
-1. Follow instructions you find in the PR template.
-1. If applicable (i.e., a module is created/updated), please reference the badge status of your pipeline run. This badge will show the reviewer that the code changes were successfully validated & tested in your environment. To create a badge, first select the three dots (`...`) at the top right of the pipeline, and then chose the `Create status badge` option.
+1. Provide a meaningful title in the form of _feat: `<module name>`_ to align with the Semantic PR Check.
+2. Provide a meaningful description.
+3. Follow instructions you find in the PR template.
+4. If applicable (i.e., a module is created/updated), please reference the badge status of your pipeline run. This badge will show the reviewer that the code changes were successfully validated & tested in your environment. To create a badge, first select the three dots (`...`) at the top right of the pipeline, and then chose the `Create status badge` option.
 
-<img src="../../../img/contribution/badgeDropdown.png" alt="Badge dropdown" height="200">
+    <img src="../../../img/contribution/badgeDropdown.png" alt="Badge dropdown" height="200">
 
-In the opening pop-up, you first need to select your branch and then click on the `Copy status badge Markdown`
+    In the opening pop-up, you first need to select your branch and then click on the `Copy status badge Markdown`
 
-<img src="../../../img/contribution/pipelineBadge.png" alt="Status Badge" height="400">
+    <img src="../../../img/contribution/pipelineBadge.png" alt="Status Badge" height="400">
 
 <!--
 ## Publishing to the Registry
