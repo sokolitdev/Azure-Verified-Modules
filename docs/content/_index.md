@@ -5,16 +5,6 @@ geekdocNav: true
 geekdocAnchor: true
 ---
 
-{{< hint type=caution icon=gdoc_date title="AVM Community Calls" >}}
-
-The AVM team has hosted it's first external community call on the 21st May 2024 🥳
-
-**This initiative is still in development!** Please review and leave issues on things you find, via [GitHub Issues](https://github.com/sokolitdev/Azure-Verified-Modules/issues) 👍
-
-{{< /hint >}}
-
-{{< youtube id="JbIMrJKW5N0" title="An introduction to Azure Verified Modules (AVM)" >}}
-
 {{< columns size=large >}}
 
 ## Value Proposition
