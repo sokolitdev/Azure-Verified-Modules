@@ -13,7 +13,7 @@ Telemetry collected as described here does not provide Microsoft with insights i
 
 While telemetry gathered as described here is only accessible by Microsoft, Customers have access to the exact same deployment information on the Azure portal, under the Deployments section of the corresponding scope (Resource Group, Subscription, etc.).
 
-See [View deployment history with Azure Resource Manager](https://learn.microsoft.com/azure/azure-resource-manager/templates/deployment-history?tabs=azure-portal) for further information on how.
+See [View deployment history with Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-history?tabs=azure-portal) for further information on how.
 
 {{< /hint >}}
 
@@ -21,7 +21,7 @@ See [View deployment history with Azure Resource Manager](https://learn.microsof
 
 ## Technical Details
 
-As detailed in [SFR3](/Azure-Verified-Modules/specs/shared/#id-sfr3---category-telemetry---deploymentusage-telemetry) each AVM module contains a `avmTelemetry` deployment, which creates a deployment such as `46d3xbcp.res.compute-virtualmachine.1-2-3.eum3` (fir Bicep) or `46d3xgtf.res.compute-virtualmachine.1-2-3.eum3` (for Terraform).
+As detailed in [SFR3](/Azure-Verified-Modules/specs/shared/#id-sfr3---category-telemetry---deploymentusage-telemetry) each AVM module contains a `avmTelemetry` deployment, which creates a deployment such as `46d3xbcp.res.compute-virtualmachine.1-2-3.eum3` (for Bicep) or `46d3xgtf.res.compute-virtualmachine.1-2-3.eum3` (for Terraform).
 
 <br>
 
