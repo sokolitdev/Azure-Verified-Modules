@@ -59,6 +59,11 @@ REVIEW. AGREED.
 Proposal: keep
 {{< /hint >}}
 
+{{< hint type=danger >}}
+REVIEW. AGREED.
+Proposal: keep
+{{< /hint >}}
+
 Module owners **MAY** cross-references other modules to build either Resource or Pattern modules.
 
 However, they **MUST** be referenced only by a public registry reference to a pinned version e.g. `br/public:avm/xxx/yyy:1.2.3`. They **MUST NOT** use local parent path references to a module e.g. `../../xxx/yyy.bicep`.

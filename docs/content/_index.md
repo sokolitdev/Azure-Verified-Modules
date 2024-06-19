@@ -9,7 +9,7 @@ geekdocAnchor: true
 
 The AVM team has hosted it's first external community call on the 21st May 2024 🥳
 
-To find out more about future calls and the recordings of previous ones please head to the [dedicated page](/Azure-Verified-Modules/resources/community)!
+**This initiative is still in development!** Please review and leave issues on things you find, via [GitHub Issues](https://github.com/sokolitdev/Azure-Verified-Modules/issues) 👍
 
 {{< /hint >}}
 

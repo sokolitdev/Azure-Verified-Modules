@@ -66,6 +66,11 @@ REVIEW. AGREED.
 Proposal: keep
 {{< /hint >}}
 
+{{< hint type=danger >}}
+REVIEW. AGREED.
+Proposal: keep
+{{< /hint >}}
+
 Modules **MAY** create/adopt public preview services and features at their discretion.
 
 Preview API versions **MAY** be used when:
@@ -416,8 +421,7 @@ REVIEW. AGREED.
 Proposal: change to ADO and change the team
 {{< /hint >}}
 
-Module owners **MUST** request a manual GitHub Pull Request review, prior to their first release of version `0.1.0` of their module, from the related GitHub Team: [`@Azure/avm-core-team-technical-bicep`](https://github.com/orgs/Azure/teams/avm-core-team-technical-bicep), OR [`@Azure/avm-core-team-technical-terraform`](https://github.com/orgs/Azure/teams/avm-core-team-technical-terraform).
-
+Module owners **MUST** request a manual GitHub Pull Request review, prior to their first release of version `0.1.0` of their module, from the following GitHub Team: [`@Azure/avm-core-team-technical`](https://github.com/orgs/Azure/teams/avm-core-team-technical/members)
 
 {{< /hint >}}
 
@@ -579,7 +583,7 @@ REVIEW. AGREED.
 Proposal: remove
 {{< /hint >}}
 
-The naming convention for the GitHub Teams **MUST** follow the below pattern:
+The naming convention for the GitHub teams **MUST** follow the below pattern:
 
 - `<hyphenated module name>-module-owners-<bicep/tf>` - to be assigned as the GitHub repository's `Module Owners` team
 - `<hyphenated module name>-module-contributors-<bicep/tf>` - to be assigned as the GitHub repository's `Module Contributors` team
@@ -621,10 +625,7 @@ Unless explicitly requested and agreed, members of the AVM core team or any PG t
 
 ##### Grant Permissions - Bicep
 
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: remove
-{{< /hint >}}
+##### Team memberships
 
 {{< hint type=note >}}
 
@@ -683,7 +684,7 @@ REVIEW. AGREED.
 Proposal: remove
 {{< /hint >}}
 
-Module owners **MUST** assign the `-module-owners-`and `-module-contributors-` teams the necessary permissions on their Terraform module repository per the guidance below.
+Module owners **MUST** assign the `-module-owners-`and `-module-contributors-` teams the necessary permissions on their Terraform module repository and edit the `CODEOWNERS` file as per the guidance below.
 
 | GitHub Team Name                       | Description                                       | Permissions | Permissions granted through | Where to work?                                                                                |
 |----------------------------------------|---------------------------------------------------|-------------|-----------------------------|-----------------------------------------------------------------------------------------------|
