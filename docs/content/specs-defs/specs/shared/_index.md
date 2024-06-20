@@ -265,8 +265,6 @@ Module owners **MUST** also provide the ability for these default names, includi
 
 In case of private endpoints, module owners **MUST** also use the value of 'groupId' (prefixed with `-`) from the private endpoint interface definition to append to the default name of the resource if the resource supports multiple instances of the same resource type.
 
-{{< hint type=note >}}
-
 Furthermore, as per [RMNFR2](/Azure-Verified-Modules/specs/shared#id-snfr22---category-inputs---parametersvariables-for-resource-ids), Resource Modules **MUST** not have a default value specified for the name of the primary resource and therefore the name **MUST** be provided and specified by the module consumer.
 
 The name provided **MAY** be used by the module owner to generate the rest of the default name for child, extension, and interface resources if they wish to. For example, for the Private Endpoint mentioned above, the full default name that can be overridden by the consumer, **MAY** be `<primary-resource-name>pep[-<endpoint-groupId>]` or `pep-<primary-resource-name>[-<endpoint-groupId>]`.
@@ -712,7 +710,7 @@ This avoids AVM Module owners from having to maintain multiple major release ver
 Variations from the upstream: removed
 {{< /hint >}}
 
-<!-- 
+<!--
 GitHub repositories where modules are held **MUST** use the below labels and **SHOULD** not use any additional labels:
 
 {{< expand "➕ AVM Standard GitHub Labels" "expand/collapse" >}}
