@@ -54,16 +54,6 @@ This section includes **Bicep specific, functional requirements (BCPFR)** for AV
 
 #### ID: BCPFR1 - Category: Composition - Cross-Referencing Modules
 
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
-
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
-
 Module owners **MAY** cross-references other modules to build either Resource or Pattern modules.
 
 However, they **MUST** be referenced only by a public registry reference to a pinned version e.g. `br/public:avm/xxx/yyy:1.2.3`. They **MUST NOT** use local parent path references to a module e.g. `../../xxx/yyy.bicep`.
@@ -80,11 +70,6 @@ Modules **MUST NOT** contain references to non-AVM modules.
 
 #### ID: BCPFR2 - Category: Composition - Role Assignments Role Definition Mapping
 
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
-
 Module owners **MAY** define common RBAC Role Definition names and IDs within a variable to allow consumers to define a RBAC Role Definition by their name rather than their ID, this should be self contained within the module themselves.
 
 However, the **MUST** use only the official RBAC Role Definition name within the variable and nothing else.
@@ -100,11 +85,6 @@ To meet the requirements of [BCPFR2](/Azure-Verified-Modules/specs/bicep/#id-bcp
 <br>
 
 #### ID: BCPFR4 - Category: Composition - Telemetry Enablement
-
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep, but change the prefix 46d3xbcp + add the prefix (example, 'handledByAvm') as additional tag in every resource/pattern module
-{{< /hint >}}
 
 To meet the requirements of [SFR3](/Azure-Verified-Modules/specs/shared/#id-sfr3---category-telemetry---deploymentusage-telemetry) & [SFR4](/Azure-Verified-Modules/specs/shared/#id-sfr4---category-telemetry---telemetry-enablement-flexibility) you **MUST** use the below code sample in your AVM Modules to achieve this.
 
@@ -189,11 +169,6 @@ This section includes **Bicep specific, non-functional requirements (BCPNFR)** f
 
 #### ID: BCPNFR1 - Category: Inputs - Data Types
 
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep, but remove paragraphs about CARML
-{{< /hint >}}
-
 To simplify the consumption experience for module consumers when interacting with complex data types input parameters, mainly objects and arrays, the Bicep feature of [User-Defined Types](https://learn.microsoft.com/azure/azure-resource-manager/bicep/user-defined-data-types) **MUST** be used and declared.
 
 {{< hint type=tip >}}
@@ -204,13 +179,13 @@ User-Defined Types are GA in Bicep as of version v0.21.1, please ensure you have
 
 [User-Defined Types](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/user-defined-data-types) allow intellisense support in supported IDEs (e.g. Visual Studio Code) for complex input parameters using arrays and objects.
 
-{{< hint type=important title="CARML Migration Exemption" >}}
+<!-- {{< hint type=important title="CARML Migration Exemption" >}}
 
 While the [transition of CARML](/Azure-Verified-Modules/faq/#carml-evolution) modules into AVM is complete, retrofitting [User-Defined Types](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/user-defined-data-types) for all modules will take a considerable amount of time.
 
 Therefore, the addition of [User-Defined Types](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/user-defined-data-types) is currently **NOT** mandated/enforced. However, past their initial release, all modules **MUST** implement [User-Defined Types](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/user-defined-data-types) prior to the release of their next version.
 
-{{< /hint >}}
+{{< /hint >}} -->
 
 <br>
 
@@ -219,11 +194,6 @@ Therefore, the addition of [User-Defined Types](https://learn.microsoft.com/en-u
 <br>
 
 #### ID: BCPNFR7 - Category: Inputs - Parameter Requirement Types
-
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
 
 Modules will have lots of parameters that will differ in their requirement type (required, optional, etc.). To help consumers understand what each parameter's requirement type is, module owners **MUST** add the requirement type to the beginning of each parameter's description. Below are the requirement types with a definition and example for the description decorator:
 
@@ -242,18 +212,13 @@ Modules will have lots of parameters that will differ in their requirement type 
 
 #### ID: BCPNFR2 - Category: Documentation - Module Documentation Generation
 
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep for now, removing reference to AVM team, and reassess later
-{{< /hint >}}
-
 {{< hint type=note >}}
 
-This script/tool is currently being developed by the AVM team and will be made available very soon.
+This script/tool is currently being developed by the Core team and will be made available very soon.
 
 {{< /hint >}}
 
-Bicep modules documentation **MUST** be automatically generated via the provided script/tooling from the AVM team, providing the following headings:
+Bicep modules documentation **MUST** be automatically generated via the provided script/tooling from the Core team, providing the following headings:
 
 - Title
 - Description
@@ -273,15 +238,14 @@ Bicep modules documentation **MUST** be automatically generated via the provided
 #### ID: BCPNFR3 - Category: Documentation - Usage Example formats
 
 {{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep, adjust module naming removing 'avm/', removing reference to AVM team
+Variations from the upstream: removing 'avm/', removing reference to AVM team
 {{< /hint >}}
 
 Usage examples for Bicep modules **MUST** be provided in the following formats:
 
 - Bicep file (orchestration module style) - `.bicep`
   ```bicep
-  module <resourceName> 'br/public:avm/res/<publishedModuleName>:1.0.0' = {
+  module <resourceName> 'br/public:res/<publishedModuleName>:1.0.0' = {
     name: '${uniqueString(deployment().name, location)}-test-<uniqueIdentifier>'
     params: { (...) }
   }
@@ -313,11 +277,6 @@ Bicep Parameter Files (`.bicepparam`) are being reviewed and considered by the A
 <br>
 
 #### ID: BCPNFR4 - Category: Documentation - Parameter Input Examples
-
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
 
 Bicep modules **MAY** provide parameter input examples for parameters using the `metadata.example` property via the `@metadata()` decorator.
 
@@ -354,11 +313,6 @@ It is planned that these examples are automatically added to the module readme's
 
 #### ID: BCPNFR5 - Category: Composition - Role Assignments Role Definition Mapping Limits
 
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
-
 As per [BCPFR2](#id-bcpfr2---category-composition---role-assignments-role-definition-mapping), module owners **MAY** define common RBAC Role Definition names and IDs within a variable to allow consumers to define a RBAC Role Definition by their name rather than their ID.
 
 Module owners **SHOULD NOT** map every RBAC Role Definition within this variable as it can cause the module to bloat in size and cause consumption issues later when stitched together with other modules due to the 4MB ARM Template size limit.
@@ -385,11 +339,6 @@ Review the [Bicep Contribution Guide's 'RBAC Role Definition Name Mapping' secti
 
 #### ID: BCPNFR6 - Category: Composition - Role Assignments Role Definition Mapping Compulsory Roles
 
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
-
 Module owners **MUST** include the following roles in the variable for RBAC Role Definition names:
 
 - Owner - ID: `8e3af657-a8ff-443c-a75c-2fe8c4bcb635`
@@ -412,11 +361,6 @@ Review the [Bicep Contribution Guide's 'RBAC Role Definition Name Mapping' secti
 
 #### ID: BCPNFR8 - Category: Composition - Code Styling - lower camelCasing
 
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
-
 Module owners **SHOULD** use [lower camelCasing](https://wikipedia.org/wiki/Camel_case) for naming the following:
 
 - Parameters
@@ -436,11 +380,6 @@ For example: `camelCasingExample` (lowercase first word (entirely), with capital
 
 #### ID: BCPNFR14 - Category: Composition - Versioning
 
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
-
 To meet [SNFR17](/Azure-Verified-Modules/specs/shared/#id-snfr17---category-release---semantic-versioning) and depending on the changes you make, you may need to bump the version in the `version.json` file.
 
 {{< include file="/static/includes/sample.bicep.version.json" language="json" options="linenos=false" >}}
@@ -459,11 +398,6 @@ For example, the `version` value should be:
 <br>
 
 #### ID: BCPNFR10 - Category: Testing - Test Bicep File Naming
-
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
 
 Module owners **MUST** name their test `.bicep` files in the `/tests/e2e/<defaults/waf-aligned/max/etc.>` directories: `main.test.bicep` as the test framework (CI) relies upon this name.
 
@@ -493,11 +427,6 @@ Module owners **MUST** use the below tooling for unit/linting/static/security an
 <br>
 
 #### ID: BCPNFR12 - Category: Testing - Deployment Test Naming
-
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
 
 Module owners **MUST** invoke the module in their test using the syntax:
 
@@ -540,13 +469,8 @@ The syntax is used by the ReadMe-generating utility to identify, pull & format u
 
 #### ID: BCPNFR13 - Category: Testing - Test file metadata
 
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
-
 By default, the ReadMe-generating utility will create usage examples headers based on each `e2e` folder's name.
-Module owners **MAY** provide a custom name & description by specfying the metadata blocks `name` & `description` in their `main.test.bicep` test files.
+Module owners **MAY** provide a custom name & description by specifying the metadata blocks `name` & `description` in their `main.test.bicep` test files.
 
 For example:
 ```bicep
@@ -568,10 +492,14 @@ This instance deploys the module using Customer-Managed-Keys using a System-Assi
 
 #### ID: BCPNFR15 - Category: Contribution/Support - AVM Module Issue template file
 
-As part of the "initial Pull Request" (that publishes the first version of the module), module owners **MUST** add an entry to the `AVM Module Issue template` file in the BRM repository ([here](https://github.com/Azure/bicep-registry-modules/blob/main/.github/ISSUE_TEMPLATE/avm_module_issue.yml)).
+{{< hint type=danger >}}
+Variations from the upstream: removing reference to AVM team and BRM repository
+{{< /hint >}}
+
+As part of the "initial Pull Request" (that publishes the first version of the module), module owners **MUST** add an entry to the `AVM Module Issue template` file in the BRM repository ([here](https://github.com/sokolitdev/bicep-registry-modules/blob/main/.github/ISSUE_TEMPLATE/avm_module_issue.yml)).
 
 {{< hint type=note >}}
-Through this approach, the AVM core team will allow raising a bug or feature request for a module, only after the module gets merged to the [BRM](https://aka.ms/BRM) repository.
+Through this approach, the Core team will allow raising a bug or feature request for a module, only after the module gets merged to the repository.
 {{< /hint >}}
 
 The module name entry **MUST** be added to the dropdown list with id `module-name-dropdown` as an option, in alphabetical order.
@@ -581,7 +509,7 @@ Module owners **MUST** ensure that the module name is added in alphabetical orde
 
 {{< /hint >}}
 
-Example - `AVM Module Issue template` module name entry for the Bicep resource module of Azure Virtual Network (`avm/res/network/virtual-network`):
+Example - `AVM Module Issue template` module name entry for the Bicep resource module of Azure Virtual Network (`res/network/virtual-network`):
 
 ```yaml
 - type: dropdown
@@ -591,7 +519,7 @@ Example - `AVM Module Issue template` module name entry for the Bicep resource m
     description: Which existing AVM module is this issue related to?
     options:
       ...
-      - "avm/res/network/virtual-network"
+      - "res/network/virtual-network"
       ...
 ```
 
