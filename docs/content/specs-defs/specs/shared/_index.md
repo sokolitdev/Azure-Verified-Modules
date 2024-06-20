@@ -61,16 +61,6 @@ This section includes **shared, functional requirements (SFR)** for Bicep an Ter
 
 #### ID: SFR1 - Category: Composition - Preview Services
 
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
-
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
-
 Modules **MAY** create/adopt public preview services and features at their discretion.
 
 Preview API versions **MAY** be used when:
@@ -94,11 +84,6 @@ However, they **MAY** be exposed at the module owners discretion, but the follow
 
 #### ID: SFR2 - Category: Composition - WAF Aligned
 
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
-
 Modules **SHOULD** align to Well-Architected Framework (WAF) pillar recommendations, alongside Microsoft Cloud Security Benchmark (MCSB) and Microsoft Defender for Cloud (MDFC), where appropriate and applicable.
 
 They **SHOULD NOT** align to these recommendations when it requires an external dependency/resource to be deployed and configured and then associated to the resources in the module.
@@ -120,13 +105,13 @@ Read the FAQ of [What does AVM mean by “WAF Aligned”?](/Azure-Verified-Modul
 #### ID: SFR3 - Category: Telemetry - Deployment/Usage Telemetry
 
 {{< hint type=danger >}}
-REVIEW. AGREED.
-Question: do we want to keep this, change the implementation to keep the telemetery 'internal', or completely remove it.
+Variations from the upstream: custom telemetry ID prefixes
 {{< /hint >}}
 
 {{< hint type=important >}}
 
-We will maintain a set of CSV files in the [AVM Central Repo (`Azure/Azure-Verified-Modules`)](https://github.com/Azure/Azure-Verified-Modules/tree/main/docs/static/module-indexes) with the required TelemetryId prefixes to enable checks to utilize this list to ensure the correct IDs are used. To see the formatted content of these CSV files with additional information, please visit the [AVM Module Indexes](/Azure-Verified-Modules/indexes) page.
+We will maintain a set of CSV files in the [AVM Central Repo (`Azure/Azure-Verified-Modules`)](https://github.com/sokolitdev/Azure-Verified-Modules/tree/main/docs/static/module-indexes) with the required TelemetryId prefixes to enable checks to utilize this list to ensure the correct IDs are used.
+<!-- To see the formatted content of these CSV files with additional information, please visit the [AVM Module Indexes](/Azure-Verified-Modules/indexes) page. -->
 
 These will also be provided as a comment on the module proposal, once accepted, from the AVM core team.
 
@@ -141,7 +126,7 @@ To highlight that AVM modules use telemetry, an information notice **MUST** be i
 
 {{< hint type=note >}}
 The following information notice is automatically added at the bottom of the `README.md` file of the module when
-- **Bicep:** Using the [`avm/utilities/tools/Set-AVMModule.ps1`](https://github.com/Azure/bicep-registry-modules/blob/main/avm/utilities/tools/Set-AVMModule.ps1) utility
+- **Bicep:** Using the [`avm/utilities/tools/Set-AVMModule.ps1`](https://github.com/sokolitdev/bicep-registry-modules/blob/main/avm/utilities/tools/Set-AVMModule.ps1) utility
 - **Terraform:** Executing the `make docs` command with the note and header `## Data Collection` being placed in the module's `_footer.md` beforehand
 {{< /hint >}}
 
@@ -153,8 +138,6 @@ The following information notice is automatically added at the bottom of the `RE
 The ARM deployment name used for the telemetry **MUST** follow the pattern and **MUST** be no longer than 64 characters in length: `<AVM 8 chars (alphanumeric)>.<res/ptn>.<(short) module name>.<version>.<uniqueness>`
 
 - `<AVM 8 chars (alphanumeric)>`
-  - Bicep == `46d3xbcp`
-  - Terraform == `46d3xgtf`
 - `<res/ptn>` == AVM Resource or Pattern Module
 - `<(short) module name>` == The AVM Module's, possibly shortened, name including the resource provider and the resource type, **without**;
   - The prefixes: `avm-res-` or `terraform-<provider>-avm-res-`
@@ -163,6 +146,10 @@ The ARM deployment name used for the telemetry **MUST** follow the pattern and *
 {{< hint type=note >}}
 
 Due to the 64-character length limit of Azure deployment names, the `<(short) module name>` segment has a length limit of 36 characters, so if the module name is longer than that, it **MUST** be truncated to 36 characters. If any of the semantic version's segments are longer than 1 character, it further restricts the number of characters that can be used for naming the module.
+
+{{< /hint >}}
+
+{{< hint type=tip >}}
 
 {{< /hint >}}
 
@@ -175,20 +162,20 @@ Due to the 64-character length limit of Azure deployment names, the `<(short) mo
 
 An example deployment name for the AVM Virtual Machine Resource Module would be:
 
-- Bicep == `46d3xbcp.res.compute-virtualmachine.1-2-3.eum3`
-- Terraform == `46d3xgtf.res.compute-virtualmachine.1-2-3.eum3`
+- Bicep == `12345678.res.compute-virtualmachine.1-2-3.eum3`
+<!-- - Terraform == `87654321.res.compute-virtualmachine.1-2-3.eum3` -->
 
 An example deployment name for a shortened module name would be:
 
-- Bicep == `46d3xbcp.res.desktopvirtualization-appgroup.1-2-3.eum3`
-- Terraform == `46d3xgtf.res.desktopvirtualization-appgroup.1-2-3.eum3`
+- Bicep == `12345678.res.desktopvirtualization-appgroup.1-2-3.eum3`
+<!-- - Terraform == `87654321.res.desktopvirtualization-appgroup.1-2-3.eum3` -->
 
 {{< hint type=tip >}}
 
 See the language specific contribution guides for detailed guidance and sample code to use in AVM modules to achieve this requirement.
 
 - [Bicep](/Azure-Verified-Modules/contributing/bicep/)
-- [Terraform](/Azure-Verified-Modules/contributing/terraform/)
+<!-- - [Terraform](/Azure-Verified-Modules/contributing/terraform/) -->
 
 {{< /hint >}}
 
@@ -199,11 +186,6 @@ See the language specific contribution guides for detailed guidance and sample c
 <br>
 
 #### ID: SFR4 - Category: Telemetry - Telemetry Enablement Flexibility
-
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
 
 The telemetry enablement **MUST** be on/enabled by default, however this **MUST** be able to be disabled by a module consumer by setting the below parameter/variable value to `false`:
 
@@ -217,11 +199,6 @@ The telemetry enablement **MUST** be on/enabled by default, however this **MUST*
 <br>
 
 #### ID: SFR5 - Category: Composition - Availability Zones
-
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
 
 Modules that deploy ***zone-redundant*** resources **MUST** enable the spanning across as many zones as possible by default, typically all 3.
 
@@ -244,17 +221,12 @@ For information on the differences between zonal and zone-redundant services, se
 #### ID: SFR6 - Category: Composition - Data Redundancy
 
 {{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal:
-
-- the default for a non-global resource module should be region redundancy.
-- the default for a global resource should be highest possible
-- the default for a pattern module should be region, and when not possible the next higher one
+Variations from the upstream: default is regional redundancy and not global redundancy
 {{< /hint >}}
 
-Modules that deploy resources or patterns that support data redundancy **SHOULD** enable this to the highest possible value by default, e.g. `RA-GZRS`. When a resource or pattern doesn't provide the ability to specify data redundancy as a simple property, e.g. `GRS` etc., then the modules **MUST** provide the ability to enable data redundancy for the resources or pattern via parameters/variables.
+Modules that deploy resources or patterns that support data redundancy **SHOULD** enable this to the regional redundancy by default, e.g. `ZRS`. When a resource or pattern doesn't provide the ability to specify data redundancy as a simple property, e.g. `ZRS` etc., then the modules **MUST** provide the ability to enable data redundancy for the resources or pattern via parameters/variables.
 
-For example, a Storage Account module can simply set the `sku.name` property to `Standard_RAGZRS`. Whereas a SQL DB or Cosmos DB module will need to expose more properties, via parameters/variables, to allow the specification of the regions to replicate data to as per the consumers requirements.
+For example, a Storage Account module can simply set the `sku.name` property to `Standard_ZRS`. Whereas a SQL DB or Cosmos DB module will need to expose more properties, via parameters/variables, to allow the specification of the regions to replicate data to as per the consumers requirements.
 
 {{< hint type=note >}}
 
@@ -281,19 +253,21 @@ This section includes **shared, non-functional requirements (SNFR)** for Bicep a
 #### ID: SNFR25 - Category: Composition - Resource Naming
 
 {{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
+Variations from the upstream: choice of use between suffixes and prefixes
 {{< /hint >}}
 
-Module owners **MUST** set the default resource name prefix for child, extension, and interface resources to the associated abbreviation for the specific resource as documented in the following CAF article [Abbreviation examples for Azure resources](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations), if specified and documented. This reduces the amount of input values a module consumer **MUST** provide by default when using the module.
 
-For example, a Private Endpoint that is being deployed as part of a resource module, via the mandatory interfaces, **MUST** set the Private Endpoint's default name to begin with the prefix of `pep-`.
+Module owners **MUST** set the default resource name prefix (or suffix) for child, extension, and interface resources to the associated abbreviation for the specific resource as documented in the following CAF article [Abbreviation examples for Azure resources](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations), if specified and documented. This reduces the amount of input values a module consumer **MUST** provide by default when using the module.
 
-Module owners **MUST** also provide the ability for these default names, including the prefixes, to be overridden via a parameter/variable if the consumer wishes to.
+For example, a Private Endpoint that is being deployed as part of a resource module, via the mandatory interfaces, **MUST** set the Private Endpoint's default name to end with (or begin with) `pep` (or `pep-`).
+
+Module owners **MUST** also provide the ability for these default names, including the suffixes (or prefixes), to be overridden via a parameter/variable if the consumer wishes to. They **MUST** also provide the ability for the consumer to specify if they wish to use prefixes or suffixes for the resource abbreviations.
+
+In case of private endpoints, module owners **MUST** also use the value of 'groupId' (prefixed with `-`) from the private endpoint interface definition to append to the default name of the resource if the resource supports multiple instances of the same resource type.
 
 Furthermore, as per [RMNFR2](/Azure-Verified-Modules/specs/shared#id-snfr22---category-inputs---parametersvariables-for-resource-ids), Resource Modules **MUST** not have a default value specified for the name of the primary resource and therefore the name **MUST** be provided and specified by the module consumer.
 
-The name provided **MAY** be used by the module owner to generate the rest of the default name for child, extension, and interface resources if they wish to. For example, for the Private Endpoint mentioned above, the full default name that can be overridden by the consumer, **MAY** be `pep-<primary-resource-name>`.
+The name provided **MAY** be used by the module owner to generate the rest of the default name for child, extension, and interface resources if they wish to. For example, for the Private Endpoint mentioned above, the full default name that can be overridden by the consumer, **MAY** be `<primary-resource-name>pep[-<endpoint-groupId>]` or `pep-<primary-resource-name>[-<endpoint-groupId>]`.
 
 {{< hint type=tip >}}
 
@@ -310,11 +284,10 @@ If the resource does not have a documented abbreviation in [Abbreviation example
 #### ID: SNFR1 - Category: Testing - Prescribed Tests
 
 {{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: change MUST to SHOULD
+Variation from the upstream: changed from MUST to SHOULD
 {{< /hint >}}
 
-Modules **MUST** use the prescribed tooling and testing frameworks defined in the language specific specs.
+Modules **SHOULD** use the prescribed tooling and testing frameworks defined in the language specific specs.
 
 <br>
 
@@ -325,14 +298,10 @@ Modules **MUST** use the prescribed tooling and testing frameworks defined in th
 #### ID: SNFR2 - Category: Testing - E2E Testing
 
 {{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal:
-
-- change MUST to SHOULD with regards to choice of whether to implement testing or not
-- keep MUST for cases when testing is decided to be implemented
+Variations from the upstream: changed MUST to SHOULD with regards to choice of whether to implement testing or not
 {{< /hint >}}
 
-Modules **MUST** implement end-to-end (deployment) testing that create actual resources to validate that module deployments work. In Bicep tests are sourced from the directories in `/tests/e2e`. In Terraform, these are in `/examples`.
+Modules **SHOULD** implement end-to-end (deployment) testing that create actual resources to validate that module deployments work. In Bicep tests are sourced from the directories in `/tests/e2e`. In Terraform, these are in `/examples`.
 
 Each test **MUST** run and complete without user inputs successfully, for automation purposes.
 
@@ -343,7 +312,7 @@ Each test **MUST** also destroy/clean-up its resources and test dependencies fol
 To see a directory and file structure for a module, see the language specific contribution guide.
 
 - [Bicep](/Azure-Verified-Modules/contributing/bicep#directory-and-file-structure)
-- [Terraform](/Azure-Verified-Modules/contributing/terraform#directory-and-file-structure)
+<!-- - [Terraform](/Azure-Verified-Modules/contributing/terraform#directory-and-file-structure) -->
 
 {{< /hint >}}
 
@@ -364,7 +333,7 @@ Module owners **MUST**:
 
 {{< expand "➕ Terraform & Bicep Log Analytics Workspace examples using simple/native declarations for use in E2E tests" "expand/collapse">}}
 
-###### Terraform
+<!-- ###### Terraform
 
 ```terraform
 resource "azurerm_resource_group" "example" {
@@ -379,7 +348,7 @@ resource "azurerm_log_analytics_workspace" "example" {
   sku                 = "PerGB2018"
   retention_in_days   = 30
 }
-```
+``` -->
 
 ###### Bicep
 
@@ -405,23 +374,17 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2021-12
 
 #### ID: SNFR3 - Category: Testing - AVM Compliance Tests
 
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
-
 Modules **MUST** pass all tests that ensure compliance to AVM specifications. These tests **MUST** pass before a module version can be published.
+
+{{< hint type=danger >}}
+Variations from the upstream: changed approving team and removed GitHub dependency
+{{< /hint >}}
 
 {{< hint type=important >}}
 
 Please note these are still under development at this time and will be published and available soon for module owners.
 
-{{< hint type=important >}}
-REVIEW. AGREED.
-Proposal: change to ADO and change the team
-{{< /hint >}}
-
-Module owners **MUST** request a manual GitHub Pull Request review, prior to their first release of version `0.1.0` of their module, from the following GitHub Team: [`@Azure/avm-core-team-technical`](https://github.com/orgs/Azure/teams/avm-core-team-technical/members)
+Module owners **MUST** request a manual Pull Request review, prior to their first release of version `0.1.0` of their module, from the Core Team.
 
 {{< /hint >}}
 
@@ -432,11 +395,6 @@ Module owners **MUST** request a manual GitHub Pull Request review, prior to the
 <br>
 
 #### ID: SNFR4 - Category: Testing - Unit Tests
-
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
 
 Modules **SHOULD** implement unit testing to ensure logic and conditions within parameters/variables/locals are performing correctly. These tests **MUST** pass before a module version can be published.
 
@@ -450,11 +408,6 @@ Unit Tests test specific module functionality, without deploying resources. Used
 
 #### ID: SNFR5 - Category: Testing - Upgrade Tests
 
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
-
 Modules **SHOULD** implement upgrade testing to ensure new features are implemented in a non-breaking fashion on non-major releases.
 
 <br>
@@ -464,11 +417,6 @@ Modules **SHOULD** implement upgrade testing to ensure new features are implemen
 <br>
 
 #### ID: SNFR6 - Category: Testing - Static Analysis/Linting Tests
-
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
 
 Modules **MUST** use static analysis, e.g., linting, security scanning (PSRule, tflint, etc.). These tests **MUST** pass before a module version can be published.
 
@@ -481,11 +429,6 @@ There may be differences between languages in linting rules standards, but the A
 <br>
 
 #### ID: SNFR7 - Category: Testing - Idempotency Tests
-
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
 
 Modules **MUST** implement idempotency end-to-end (deployment) testing. E.g. deploying the module twice over the top of itself.
 
@@ -501,11 +444,6 @@ For example, Virtual Machine Image names must be unique on each resource creatio
 
 #### ID: SNFR24 - Category: Testing - Testing Child, Extension & Interface Resources
 
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
-
 Module owners **MUST** test that child, extension and [interface resources](/Azure-Verified-Modules/specs/shared/interfaces/), that are supported by their modules, are tested in E2E tests as per [SNFR2](/Azure-Verified-Modules/specs/shared#id-snfr2---category-testing---e2e-testing) to ensure they deploy and are configured correctly.
 
 These **MAY** be tested in a separate E2E test and **DO NOT** have to be tested in each E2E test.
@@ -519,22 +457,10 @@ These **MAY** be tested in a separate E2E test and **DO NOT** have to be tested 
 #### ID: SNFR8 - Category: Contribution/Support - Module Owner(s) GitHub
 
 {{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal:
-
-- change to ADO
-- change 'owner' from MS FTE to any repo Contributor, and add that assignment approval will happen by Repo owner
+Variations from the upstream: changed approving team and removed GitHub dependency
 {{< /hint >}}
 
-A module **MUST** have an owner that is defined and managed by a GitHub Team in the Azure GitHub organization.
-
-Today this is only Microsoft FTEs, but everyone is welcome to contribute. The module just **MUST** be owned by a Microsoft FTE (today) so we can enforce and provide the long-term support required by this initiative.
-
-{{< hint type=note >}}
-
-The names for the GitHub teams for each approved module are already defined in the respective [Module Indexes](/Azure-Verified-Modules/indexes/). These teams **MUST** be created (and used) for each module.
-
-{{< /hint >}}
+A module **MUST** have an owner that is defined and managed by a Core Team.
 
 <br>
 
@@ -545,33 +471,23 @@ The names for the GitHub teams for each approved module are already defined in t
 #### ID: SNFR20 - Category: Contribution/Support - GitHub Teams Only
 
 {{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal:
-
-- change to ADO
-- change teams assigned
+Variations from the upstream: removed restrictions on contributions by non-MSFT and removed GitHub dependency
 {{< /hint >}}
 
-All GitHub repositories that AVM module are published from and hosted within **MUST** only assign GitHub repository permissions to GitHub teams only.
+All repositories that AVM module are published from and hosted within **MUST** only assign repository permissions to teams only.
 
-Each module **MUST** have separate GitHub teams assigned for module owners **AND** module contributors respectively. These GitHub teams **MUST** be created in the [Azure organization](https://github.com/orgs/Azure/teams) in GitHub.
+Each module **MUST** have separate teams assigned for module owners **AND** module contributors respectively.
 
-There **MUST NOT** be any GitHub repository permissions assigned to individual users.
+There **MUST NOT** be any repository permissions assigned to individual users.
 
 {{< hint type=note >}}
-The names for the GitHub teams for each approved module are already defined in the respective [Module Indexes](/Azure-Verified-Modules/indexes/). These teams **MUST** be created (and used) for each module.
+The names for the teams for each approved module will be defined in the respective [Module Indexes](/Azure-Verified-Modules/indexes/). These teams **MUST** be created (and used) for each module.
 
-- [Bicep Resource Modules](/Azure-Verified-Modules/indexes/bicep/bicep-resource-modules/#module-name-telemetry-id-prefix-github-teams-for-owners--contributors)
-- [Bicep Pattern Modules](/Azure-Verified-Modules/indexes/bicep/bicep-pattern-modules/#module-name-telemetry-id-prefix-github-teams-for-owners--contributors)
-- [Terraform Resource Modules](/Azure-Verified-Modules/indexes/terraform/tf-resource-modules/#module-name-telemetry-id-prefix-github-teams-for-owners--contributors)
-- [Terraform Pattern Modules](/Azure-Verified-Modules/indexes/terraform/tf-pattern-modules/#module-name-telemetry-id-prefix-github-teams-for-owners--contributors)
+- [Bicep Resource Modules](/Azure-Verified-Modules/indexes/bicep/bicep-resource-modules/#module-name-telemetry-id-prefix-teams-for-owners--contributors)
+- [Bicep Pattern Modules](/Azure-Verified-Modules/indexes/bicep/bicep-pattern-modules/#module-name-telemetry-id-prefix-teams-for-owners--contributors)
+<!-- - [Terraform Resource Modules](/Azure-Verified-Modules/indexes/terraform/tf-resource-modules/#module-name-telemetry-id-prefix-github-teams-for-owners--contributors)
+- [Terraform Pattern Modules](/Azure-Verified-Modules/indexes/terraform/tf-pattern-modules/#module-name-telemetry-id-prefix-github-teams-for-owners--contributors) -->
 
-The `@Azure` prefix in the last column of the tables linked above represents the "Azure" GitHub organization all AVM-related repositories exist in. **DO NOT** include this segment in the team's name!
-
-{{< /hint >}}
-
-{{< hint type=important >}}
-Non-FTE / external contributors (subject matter experts that aren't Microsoft employees) can't be members of the teams described in this chapter, hence, they won't gain any extra permissions on AVM repositories, therefore, they need to work in forks.
 {{< /hint >}}
 
 <br>
@@ -579,17 +495,16 @@ Non-FTE / external contributors (subject matter experts that aren't Microsoft em
 ##### Naming Convention
 
 {{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: remove
+Variations from the upstream: changed from MUST to MAY and removed GitHub dependency
 {{< /hint >}}
 
-The naming convention for the GitHub teams **MUST** follow the below pattern:
+The naming convention for the teams **MAY** follow the below pattern:
 
-- `<hyphenated module name>-module-owners-<bicep/tf>` - to be assigned as the GitHub repository's `Module Owners` team
-- `<hyphenated module name>-module-contributors-<bicep/tf>` - to be assigned as the GitHub repository's `Module Contributors` team
+- `<hyphenated module name>-module-owners-<bicep/tf>` - to be assigned as the repository's `Module Owners` team
+- `<hyphenated module name>-module-contributors-<bicep/tf>` - to be assigned as the repository's `Module Contributors` team
 
 {{< hint type=note >}}
-The naming convention for Bicep modules is slightly different than the naming convention for their respective GitHub teams.
+The naming convention for Bicep modules is slightly different than the naming convention for their respective teams.
 {{< /hint >}}
 
 Segments:
@@ -597,7 +512,7 @@ Segments:
 - `<hyphenated module name>` == the AVM Module's name, with each segment separated by dashes, i.e., `avm-res-<resource provider>-<ARM resource type>`
   - See [RMNFR1](#id-rmnfr1---category-naming---module-naming) for AVM Resource Module Naming
   - See [PMNFR1](#id-pmnfr1---category-naming---module-naming) for AVM Pattern Module Naming
-- `module-owners` or `module-contributors` == the role the GitHub Team is assigned to
+- `module-owners` or `module-contributors` == the role the Team is assigned to
 - `<bicep/tf>` == the language the module is written in
 
 Examples:
@@ -609,15 +524,9 @@ Examples:
 
 ##### Add Team Members
 
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: remove
-{{< /hint >}}
+All officially documented module owner(s) **MAY** be added to the `-module-owners-` team. The `-module-owners-` team **MUST NOT** have any other members.
 
-
-All officially documented module owner(s) **MUST** be added to the `-module-owners-` team. The `-module-owners-` team **MUST NOT** have any other members.
-
-Any additional module contributors whom the module owner(s) agreed to work with **MUST** be added to the `-module-contributors-` team.
+Any additional module contributors whom the module owner(s) agreed to work with **MAY** be added to the `-module-contributors-` team.
 
 Unless explicitly requested and agreed, members of the AVM core team or any PG teams **MUST NOT** be added to the `-module-owners-` or `-module-contributors-` teams as permissions for them are granted through the teams described in [SNFR9](/Azure-Verified-Modules/specs/shared/#id-snfr9---category-contributionsupport---avm--pg-teams-github-repo-permissions).
 
@@ -633,19 +542,19 @@ In case of Bicep modules, permissions to the [BRM](https://aka.ms/BRM) repositor
 
 {{< /hint >}}
 
-Module owners **MUST** create their `-module-owners-` and `-module-contributors-` teams and as part of the provisioning process, they **MUST** request the addition of these teams to their respective parent teams (see the table below for details).
+Module owners **MAY** create their `-module-owners-` and `-module-contributors-` teams and as part of the provisioning process, they **MAY** request the addition of these teams to their respective parent teams (see the table below for details).
 
-| GitHub Team Name                                     | Description                                    | Permissions | Permissions granted through                                        | Where to work?          |
+| Team Name                                     | Description                                    | Permissions | Permissions granted through                                        | Where to work?          |
 |------------------------------------------------------|------------------------------------------------|-------------|--------------------------------------------------------------------|-------------------------|
 | `<hyphenated module name>-module-owners-bicep`       | AVM Bicep Module Owners - \<module name>       | **Write**   | Assignment to the **`avm-technical-reviewers-bicep`** parent team. | Need to work in a fork. |
 | `<hyphenated module name>-module-contributors-bicep` | AVM Bicep Module Contributors - \<module name> | **Triage**  | **`avm-module-contributors-bicep`** parent team.                   | Need to work in a fork. |
 
-Examples - GitHub teams required for the Bicep resource module of Azure Virtual Network (`avm/res/network/virtual-network`):
+Examples - teams required for the Bicep resource module of Azure Virtual Network (`avm/res/network/virtual-network`):
 
 - `avm-res-network-virtualnetwork-module-owners-bicep` --> assign to the `avm-technical-reviewers-bicep` parent team.
 - `avm-res-network-virtualnetwork-module-contributors-bicep` --> assign to the `avm-module-contributors-bicep` parent team.
 
-{{< hint type=tip >}}
+<!-- {{< hint type=tip >}}
 Direct link to create a new GitHub team and assign it to its parent: [Create new team](https://github.com/orgs/Azure/new-team)
 
 Fill in the values as follows:
@@ -655,11 +564,15 @@ Fill in the values as follows:
 - **Parent team**: Follow the guidance above (see the Permissions granted through column in the table above).
 - **Team visibility**: `Visible`
 - **Team notifications**: `Enabled`
-{{< /hint >}}
+{{< /hint >}} -->
 
 ##### CODEOWNERS file
 
-As part of the "initial Pull Request" (that publishes the first version of the module), module owners **MUST** add an entry to the `CODEOWNERS` file in the BRM repository ([here](https://github.com/Azure/bicep-registry-modules/blob/main/.github/CODEOWNERS)).
+{{< hint type=danger >}}
+Variations from the upstream: in case of using GitHub
+{{< /hint >}}
+
+If this repository is hosted on GitHub, as part of the "initial Pull Request" (that publishes the first version of the module), module owners **MUST** add an entry to the `CODEOWNERS` file in the BRM repository ([here](https://github.com/Azure/bicep-registry-modules/blob/main/.github/CODEOWNERS)).
 
 {{< hint type=note >}}
 Through this approach, the AVM core team will grant review permission to module owners as part of the standard PR review process.
@@ -668,21 +581,19 @@ Through this approach, the AVM core team will grant review permission to module 
 Every `CODEOWNERS` entry (line) **MUST** include the following segments separated by a single whitespace character:
 
 - Path of the module, relative to the repo's root, e.g.: `/avm/res/network/virtual-network/`
-- The `-module-owners-`team, with the `@Azure/` prefix, e.g., `@Azure/avm-res-network-virtualnetwork-module-owners-bicep`
-- The GitHub team of the AVM core team, with the `@Azure/` prefix, i.e., `@Azure/avm-core-team-technical-bicep`
+- The `-module-owners-`team, with the `@<org>/` prefix, e.g., `@<org>/avm-res-network-virtualnetwork-module-owners-bicep`
+- The GitHub team of the AVM core team, with the `@<org>/` prefix, i.e., `@<org>/avm-core-team-technical-bicep`
+where `<org>` is the GitHub organization name.
 
 Example - `CODEOWNERS` entry for the Bicep resource module of Azure Virtual Network (`avm/res/network/virtual-network`):
 
-- `/avm/res/network/virtual-network/ @Azure/avm-res-network-virtualnetwork-module-owners-bicep @Azure/avm-core-team-technical-bicep`
+- `/avm/res/network/virtual-network/ @<org>/avm-res-network-virtualnetwork-module-owners-bicep @<org>/avm-core-team-technical-bicep`
 
 <br>
 
-##### Grant Permissions - Terraform
+<!-- ##### Grant Permissions - Terraform
 
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: remove
-{{< /hint >}}
+
 
 Module owners **MUST** assign the `-module-owners-`and `-module-contributors-` teams the necessary permissions on their Terraform module repository and edit the `CODEOWNERS` file as per the guidance below.
 
@@ -701,7 +612,7 @@ Fill in the values as follows:
 - **Parent team**: Do not assign the team to any parent team.
 - **Team visibility**: `Visible`
 - **Team notifications**: `Enabled`
-{{< /hint >}}
+{{< /hint >}} -->
 
 <br>
 
@@ -712,11 +623,10 @@ Fill in the values as follows:
 #### ID: SNFR9 - Category: Contribution/Support - AVM & PG Teams GitHub Repo Permissions
 
 {{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: remove
+Variations from the upstream: removed
 {{< /hint >}}
 
-A module owner **MUST** make the following GitHub teams in the Azure GitHub organization admins on the GitHub repo of the module in question:
+<!-- A module owner **MUST** make the following GitHub teams in the Azure GitHub organization admins on the GitHub repo of the module in question:
 
 ##### Bicep
 
@@ -736,7 +646,7 @@ These required GitHub teams are already associated to the [BRM](https://aka.ms/B
 Module owners **MUST** assign these GitHub teams as admins on the GitHub repo of the module in question.
 
 For detailed steps, please follow this [guidance](https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/managing-repository-settings/managing-teams-and-people-with-access-to-your-repository#inviting-a-team-or-person).
-{{< /hint >}}
+{{< /hint >}} -->
 
 <br>
 
@@ -744,15 +654,15 @@ For detailed steps, please follow this [guidance](https://docs.github.com/reposi
 
 <br>
 
-#### ID: SNFR10 - Category: Contribution/Support - MIT Licensing
+#### ID: SNFR10 - Category: Contribution/Support - Licensing
 
 {{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: change GH to ADO
+Variations from the upstream: removed mention of the GitHub repository, making licensing an authors choice
 {{< /hint >}}
 
+Module owners **MAY** choose a license.
 
-A module **MUST** be published with the MIT License in the Azure GitHub organization.
+A module **MUST** be published with the correct license.
 
 <br>
 
@@ -763,12 +673,12 @@ A module **MUST** be published with the MIT License in the Azure GitHub organiza
 #### ID: SNFR11 - Category: Contribution/Support - Issues Response Times
 
 {{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: remove
+Variations from the upstream: removed fixed SLA.
 {{< /hint >}}
 
 
-A module owner **MUST** respond to logged issues within 3 business days. See [Module Support](/Azure-Verified-Modules/help-support/module-support/) for more information.
+A module owner **MUST** respond to logged issues.
+<!-- within 3 business days. See [Module Support](/Azure-Verified-Modules/help-support/module-support/) for more information. -->
 
 <br>
 
@@ -779,12 +689,10 @@ A module owner **MUST** respond to logged issues within 3 business days. See [Mo
 #### ID: SNFR12 - Category: Contribution/Support - Versions Supported
 
 {{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: rephrase to "latest lreased major version"
+Variations from the upstream: changed from MUST to SHOULD, and added clarification on the latest version being major.minor
 {{< /hint >}}
 
-
-Only the latest released version of a module **MUST** be supported.
+Only the latest released major.minor version of a module **SHOULD** be supported.
 
 For example, if an AVM Resource Module is used in an AVM Pattern Module that was working but now is not. The first step by the AVM Pattern Module owner should be to upgrade to the latest version of the AVM Resource Module test and then if not fixed, troubleshoot and fix forward from the that latest version of the AVM Resource Module onwards.
 
@@ -799,11 +707,10 @@ This avoids AVM Module owners from having to maintain multiple major release ver
 #### ID: SNFR23 - Category: Contribution/Support - GitHub Repo Labels
 
 {{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: remove
+Variations from the upstream: removed
 {{< /hint >}}
 
-
+<!--
 GitHub repositories where modules are held **MUST** use the below labels and **SHOULD** not use any additional labels:
 
 {{< expand "➕ AVM Standard GitHub Labels" "expand/collapse" >}}
@@ -856,7 +763,7 @@ These `Set-AvmGitHubLabels.ps1` can be downloaded from <a href="/Azure-Verified-
 
 {{< include file="/static/scripts/Set-AvmGitHubLabels.ps1" language="powershell" options="linenos=false" >}}
 
-{{< /expand >}}
+{{< /expand >}} -->
 
 <br>
 
@@ -865,12 +772,6 @@ These `Set-AvmGitHubLabels.ps1` can be downloaded from <a href="/Azure-Verified-
 <br>
 
 #### ID: SNFR14 - Category: Inputs - Data Types
-
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
-
 
 A module **SHOULD** use either: simple data types. e.g., string, int, bool.
 
@@ -885,11 +786,6 @@ Complex data types (objects, arrays, maps) when the language-compliant schema is
 <br>
 
 #### ID: SNFR22 - Category: Inputs - Parameters/Variables for Resource IDs
-
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
 
 A module parameter/variable that requires a full Azure Resource ID as an input value, e.g. `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{keyVaultName}`, **MUST** contain `ResourceId/resource_id` in its parameter/variable name to assist users in knowing what value to provide at a glance of the parameter/variable name.
 
@@ -906,11 +802,10 @@ Example for the property `workspaceId` for the Diagnostic Settings resource. In 
 #### ID: SNFR15 - Category: Documentation - Automatic Documentation Generation
 
 {{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: change MUST to SHOULD
+Variations from the upstream: changed from MUST to SHOULD.
 {{< /hint >}}
 
-README documentation **MUST** be automatically/programmatically generated. **MUST** include the sections as defined in the language specific requirements [BCPNFR2](/Azure-Verified-Modules/specs/bicep/#id-bcpnfr2---category-documentation---module-documentation-generation), [TFNFR2](/Azure-Verified-Modules/specs/terraform/#id-tfnfr2---category-documentation---module-documentation-generation).
+README documentation **SHOULD** be automatically/programmatically generated. **SHOULD** include the sections as defined in the language specific requirements [BCPNFR2](/Azure-Verified-Modules/specs/bicep/#id-bcpnfr2---category-documentation---module-documentation-generation), [TFNFR2](/Azure-Verified-Modules/specs/terraform/#id-tfnfr2---category-documentation---module-documentation-generation).
 
 <br>
 
@@ -921,11 +816,10 @@ README documentation **MUST** be automatically/programmatically generated. **MUS
 #### ID: SNFR16 - Category: Documentation - Examples/E2E
 
 {{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
+Variations from the upstream: changed from MUST to SHOULD.
 {{< /hint >}}
 
-An examples/e2e directory **MUST** exist to provide named scenarios for module deployment.
+An examples/e2e directory **SHOULD** exist to provide named scenarios for module deployment.
 
 <br>
 
@@ -934,11 +828,6 @@ An examples/e2e directory **MUST** exist to provide named scenarios for module d
 <br>
 
 #### ID: SNFR17 - Category: Release - Semantic Versioning
-
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
 
 {{< hint type=important >}}
 
@@ -979,11 +868,6 @@ For example all modules should be released using a semantic version that matches
 
 #### ID: SNFR18 - Category: Release - Breaking Changes
 
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
-
 A module **SHOULD** avoid breaking changes, e.g., deprecating inputs vs. removing.
 
 <br>
@@ -995,25 +879,19 @@ A module **SHOULD** avoid breaking changes, e.g., deprecating inputs vs. removin
 #### ID: SNFR19 - Category: Publishing - Registries Targeted
 
 {{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal:
-
-- change MUST to SHOULD
-- take repo URL out of this specification
+Variations from the upstream: changed from MUST to SHOULD, repoved registry URL
 {{< /hint >}}
 
-Modules **MUST** be published to their respective language public registries.
+Modules **SHOULD** be published to their respective language registries.
 
-- Bicep = [Bicep Public Module Registry](https://aka.ms/BRM)
-  - Within the `avm` directory
-- Terraform = [HashiCorp Terraform Registry](https://registry.terraform.io/)
+
 
 {{< hint type=tip >}}
 
 See the language specific contribution guides for detailed guidance and sample code to use in AVM modules to achieve this requirement.
 
-- [Bicep](/Azure-Verified-Modules/contributing/bicep/)
-- [Terraform](/Azure-Verified-Modules/contributing/terraform/)
+<!-- - [Bicep](/Azure-Verified-Modules/contributing/bicep/) -->
+<!-- - [Terraform](/Azure-Verified-Modules/contributing/terraform/) -->
 
 {{< /hint >}}
 
@@ -1024,11 +902,6 @@ See the language specific contribution guides for detailed guidance and sample c
 <br>
 
 #### ID: SNFR21 - Category: Publishing - Cross Language Collaboration
-
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
 
 When the module owners of the same Resource or Pattern AVM module are not the same individual or team for all languages, each languages team **SHOULD** collaborate with their sibling language team for the same module to ensure consistency where possible.
 
@@ -1057,11 +930,6 @@ This section includes **resource module level, functional requirements (RMFR)** 
 
 #### ID: RMFR1 - Category: Composition - Single Resource Only
 
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
-
 A resource module **MUST** only deploy a single instance of the primary resource, e.g., one virtual machine per instance.
 
 Multiple instances of the module **MUST** be used to scale out.
@@ -1075,11 +943,10 @@ Multiple instances of the module **MUST** be used to scale out.
 #### ID: RMFR2 - Category: Composition - No Resource Wrapper Modules
 
 {{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: change MUST to SHOULD
+Variations from the upstream: changed from MUST to SHOULD.
 {{< /hint >}}
 
-A resource module **MUST** add value by including additional features on top of the primary resource.
+A resource module **SHOULD** add value by including additional features on top of the primary resource.
 
 <br>
 
@@ -1088,11 +955,6 @@ A resource module **MUST** add value by including additional features on top of 
 <br>
 
 #### ID: RMFR3 - Category: Composition - Resource Groups
-
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
 
 A resource module **MUST NOT** create a Resource Group **for resources that require them.**
 
@@ -1110,11 +972,6 @@ Scopes will be covered further in the respective language specific specification
 <br>
 
 #### ID: RMFR4 - Category: Composition - AVM Consistent Feature & Extension Resources Value Add
-
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
 
 Resource modules support the following optional features/extension resources, as specified, if supported by the primary resource. The top-level variable/parameter names **MUST** be:
 
@@ -1144,7 +1001,7 @@ Module owners **MAY** choose to utilize cross repo dependencies for these "add-o
 Make sure to checkout the language specific specifications for more info on this:
 
 - [Bicep](/Azure-Verified-Modules/specs/bicep#id-bcpnfr1---category-composition---cross-referencing-modules)
-- [Terraform](/Azure-Verified-Modules/specs/terraform#id-tfnfr1---category-composition---cross-referencing-modules)
+<!-- - [Terraform](/Azure-Verified-Modules/specs/terraform#id-tfnfr1---category-composition---cross-referencing-modules) -->
 
 {{< /hint >}}
 
@@ -1155,11 +1012,6 @@ Make sure to checkout the language specific specifications for more info on this
 <br>
 
 #### ID: RMFR5 - Category: Composition - AVM Consistent Feature & Extension Resources Value Add Interfaces/Schemas
-
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
 
 Resource modules **MUST** implement a common interface, e.g. the input's data structures and properties within them (objects/arrays/dictionaries/maps), for the optional features/extension resources:
 
@@ -1182,11 +1034,6 @@ See:
 
 #### ID: RMFR8 - Category: Composition - Dependency on child and other resources
 
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
-
 A resource module **MAY** contain references to other resource modules, however **MUST NOT** contain references to non-AVM modules nor AVM pattern modules.
 
 See [BCPFR1](/Azure-Verified-Modules/specs/bicep/#id-bcpfr1---category-composition---cross-referencing-modules) and [TFFR1](/Azure-Verified-Modules/specs/terraform/#id-tffr1---category-composition---cross-referencing-modules) for more information on this.
@@ -1198,11 +1045,6 @@ See [BCPFR1](/Azure-Verified-Modules/specs/bicep/#id-bcpfr1---category-compositi
 <br>
 
 #### ID: RMFR6 - Category: Inputs - Parameter/Variable Naming
-
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
 
 Parameters/variables that pertain to the primary resource **MUST NOT** use the resource type in the name.
 
@@ -1217,11 +1059,6 @@ Another example for where RPs contain some of their name within a property, leav
 <br>
 
 #### ID: RMFR7 - Category: Outputs - Minimum Required Outputs
-
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
 
 Module owners **MUST** output the following outputs as a minimum in their modules:
 
@@ -1258,14 +1095,9 @@ This section includes **resource module level, non-functional requirements (RMNF
 
 #### ID: RMNFR1 - Category: Naming - Module Naming
 
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: change URLs
-{{< /hint >}}
-
 {{< hint type=note >}}
 
-We will maintain a set of CSV files in the [AVM Central Repo (`Azure/Azure-Verified-Modules`)](https://github.com/Azure/Azure-Verified-Modules/tree/main/docs/static/module-indexes) with the correct singular names for all resource types to enable checks to utilize this list to ensure repos are named correctly. To see the formatted content of these CSV files with additional information, please visit the [AVM Module Indexes](/Azure-Verified-Modules/indexes) page.
+We will maintain a set of CSV files in the [AVM Central Repo (`Azure/Azure-Verified-Modules`)](https://github.com/sokolitdev/Azure-Verified-Modules/tree/main/docs/static/module-indexes) with the correct singular names for all resource types to enable checks to utilize this list to ensure repos are named correctly. To see the formatted content of these CSV files with additional information, please visit the [AVM Module Indexes](/Azure-Verified-Modules/indexes) page.
 
 This will be updated quarterly, or ad-hoc as new RPs/ Resources are created and highlighted via a check failure.
 
@@ -1275,13 +1107,12 @@ Resource modules **MUST** follow the below naming conventions (all lower case):
 
 ##### Bicep Resource Module Naming
 
-{{< hint type=important >}}
-REVIEW. AGREED.
-Proposal: change by removing 'avm/' part to shorten the name
+{{< hint type=danger >}}
+Variations from the upstream: removed 'avm/' part to shorten the name
 {{< /hint >}}
 
-- Naming convention: `avm/res/<hyphenated resource provider name>/<hyphenated ARM resource type>` (module name for registry)
-- Example: `avm/res/compute/virtual-machine` or `avm/res/managed-identity/user-assigned-identity`
+- Naming convention: `res/<hyphenated resource provider name>/<hyphenated ARM resource type>` (module name for registry)
+- Example: `res/compute/virtual-machine` or `res/managed-identity/user-assigned-identity`
 - Segments:
   - `res` defines this is a resource module
   - `<hyphenated resource provider name>` is the resource provider’s name after the `Microsoft` part, with each word starting with a capital letter separated by dashes, e.g., `Microsoft.Compute` = `compute`, `Microsoft.ManagedIdentity` = `managed-identity`.
@@ -1289,15 +1120,14 @@ Proposal: change by removing 'avm/' part to shorten the name
 
 ##### Terraform Resource Module Naming
 
-{{< hint type=important >}}
-REVIEW. AGREED.
-Proposal: change by removing 'avm-' part to shorten the name
+{{< hint type=danger >}}
+Variations from the upstream: removed 'avm-' part to shorten the name
 {{< /hint >}}
 
 - Naming convention:
-  - `avm-res-<resource provider>-<ARM resource type>` (module name for registry)
-  - `terraform-<provider>-avm-res-<resource provider>-<ARM resource type>` (GitHub repository name to meet registry naming requirements)
-- Example: `avm-res-compute-virtualmachine` or `avm-res-managedidentity-userassignedidentity`
+  - `res-<resource provider>-<ARM resource type>` (module name for registry)
+  - `terraform-<provider>-res-<resource provider>-<ARM resource type>` (GitHub repository name to meet registry naming requirements)
+- Example: `res-compute-virtualmachine` or `res-managedidentity-userassignedidentity`
 - Segments:
   - `<provider>` is the logical abstraction of various APIs used by Terraform. In most cases, this is going to be `azurerm` or `azuread` for resource modules.
   - `res` defines this is a resource module
@@ -1311,11 +1141,6 @@ Proposal: change by removing 'avm-' part to shorten the name
 <br>
 
 #### ID: RMNFR2 - Category: Inputs - Parameter/Variable Naming
-
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
 
 A resource module **MUST** use the following standard inputs:
 
@@ -1331,13 +1156,12 @@ A resource module **MUST** use the following standard inputs:
 #### ID: RMNFR3 - Category: Composition - RP Collaboration
 
 {{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: remove
+Variations from the upstream: removed.
 {{< /hint >}}
 
-Module owners (Microsoft FTEs) **SHOULD** reach out to the respective Resource Provider teams to build a partnership and collaboration on the modules creation, existence and long term maintenance.
+<!-- Module owners (Microsoft FTEs) **SHOULD** reach out to the respective Resource Provider teams to build a partnership and collaboration on the modules creation, existence and long term maintenance.
 
-Review this [wiki page (Microsoft Internal)](https://dev.azure.com/CSUSolEng/Azure%20Verified%20Modules/_wiki/wikis/AVM%20Internal%20Wiki/276/RP-Collaboration) for more information.
+Review this [wiki page (Microsoft Internal)](https://dev.azure.com/CSUSolEng/Azure%20Verified%20Modules/_wiki/wikis/AVM%20Internal%20Wiki/276/RP-Collaboration) for more information. -->
 
 <br>
 
@@ -1364,11 +1188,6 @@ This section includes **pattern module level, functional requirements (PMFR)** f
 
 #### ID: PMFR1 - Category: Composition - Resource Group Creation
 
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
-
 A Pattern Module **MAY** create Resource Group(s).
 
 <br>
@@ -1390,16 +1209,15 @@ This section includes **pattern module level, non-functional requirements (PMNFR
 #### ID: PMNFR1 - Category: Naming - Module Naming
 
 {{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: change by removing 'avm/' part to shorten the name
+Variations from the upstream: removed 'avm/' part to shorten the name
 {{< /hint >}}
 
 Pattern Modules **MUST** follow the below naming conventions (all lower case):
 
 ##### Bicep Pattern Module Naming
 
-- Naming convention: `avm/ptn/<hyphenated grouping/category name>/<hyphenated pattern module name>`
-- Example: `avm/ptn/compute/app-tier-vmss` or `avm/ptn/avd-lza/management-plane` or `avm/ptn/3-tier/web-app`
+- Naming convention: `ptn/<hyphenated grouping/category name>/<hyphenated pattern module name>`
+- Example: `ptn/compute/app-tier-vmss` or `ptn/avd-lza/management-plane` or `ptn/3-tier/web-app`
 - Segments:
   - `ptn` defines this as a pattern module
   - `<hyphenated grouping/category name>` is a hierarchical grouping of pattern modules by category, with each word separated by dashes, such as:
@@ -1411,9 +1229,9 @@ Pattern Modules **MUST** follow the below naming conventions (all lower case):
 ##### Terraform Pattern Module Naming
 
 - Naming convention:
-  - `avm-ptn-<pattern module name>` (Module name for registry)
-  - `terraform-<provider>-avm-ptn-<pattern module name>` (GitHub repository name to meet registry naming requirements)
-- Example: `avm-ptn-apptiervmss` or `avm-ptn-avd-lza-managementplane`
+  - `ptn-<pattern module name>` (Module name for registry)
+  - `terraform-<provider>-ptn-<pattern module name>` (GitHub repository name to meet registry naming requirements)
+- Example: `ptn-apptiervmss` or `ptn-avd-lza-managementplane`
 - Segments:
   - `<provider>` is the logical abstraction of various APIs used by Terraform. In most cases, this is going to be `azurerm` or `azuread` for resource modules.
   - `ptn` defines this as a pattern module
@@ -1426,11 +1244,6 @@ Pattern Modules **MUST** follow the below naming conventions (all lower case):
 <br>
 
 #### ID: PMNFR2 - Category: Composition - Use Resource Modules to Build a Pattern Module
-
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
 
 A Pattern Module **SHOULD** be built from AVM Resources Modules to establish a standardized code base and improve maintainability. If a valid reason exists, a pattern module **MAY** contain native resources ("vanilla" code) where it's necessary. A Pattern Module **MUST NOT** contain references to non-AVM modules.
 
@@ -1451,11 +1264,6 @@ In the latter case, the Pattern Module **SHOULD** be updated to use the Resource
 
 #### ID: PMNFR3 - Category: Composition - Use other Pattern Modules to Build a Pattern Module
 
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep, but add that consuming pattern owner is responsible to update its pattern module when used pattern module is updated and its older version is no longer supported.
-{{< /hint >}}
-
 A Pattern Module **MAY** contain and be built using other AVM Pattern Modules. A Pattern Module **MUST NOT** contain references to non-AVM modules.
 
 <br>
@@ -1467,11 +1275,10 @@ A Pattern Module **MAY** contain and be built using other AVM Pattern Modules. A
 #### ID: PMNFR4 - Category: Hygiene - Missing Resource Module(s)
 
 {{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: change, by removing a URL and allow issue tracker to be of choice
+Variations from the upstream: changed from MUST to SHOULD
 {{< /hint >}}
 
-An item **MUST** be logged onto as an issue on the [AVM Central Repo (`Azure/Azure-Verified-Modules`)](https://github.com/Azure/Azure-Verified-Modules/issues) if a Resource Module does not exist for resources deployed by the pattern module.
+An item **SHOULD** be logged onto as an issue on the [AVM Central Repo (`Azure/Azure-Verified-Modules`)](https://github.com/sokolitdev/Azure-Verified-Modules/issues) if a Resource Module does not exist for resources deployed by the pattern module.
 
 {{< hint type=important title=Exception >}}
 
@@ -1486,11 +1293,6 @@ If the Resource Module adds no value, see Resource Module functional requirement
 <br>
 
 #### ID: PMNFR5 - Category: Inputs - Parameter/Variable Naming
-
-{{< hint type=danger >}}
-REVIEW. AGREED.
-Proposal: keep
-{{< /hint >}}
 
 Parameter/variable input names **SHOULD** contain the resource to which they pertain. E.g., `virtualMachineSku`/`virtualmachine_sku`
 

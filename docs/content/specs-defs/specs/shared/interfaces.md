@@ -15,13 +15,14 @@ Below are the interfaces/schemas for the AVM Resource Modules features/extension
 ## Diagnostic Settings
 
 {{< hint type=danger >}}
-REVIEW.
-Proposal: specify currently known categories, but keep it available to add additional values when using the module.
+Variations from the upstream: add ability to specify currently known categories, but keep it available to add additional values when using the module.
 {{< /hint >}}
 
 {{< hint type=important >}}
 
-Allowed values for logs and metric categories or category groups **MUST NOT** be specified to keep the module implementation evergreen for any new categories or category groups added by RPs, without module owners having to update a list of allowed values and cut a new release of their module.
+Allowed values for logs and metric categories or category groups **MUST NOT** be restricted to keep the module implementation evergreen for any new categories or category groups added by RPs, without module owners having to update a list of allowed values and cut a new release of their module.
+
+Module owners may provide a list of categories or category groups that are known to be available at the time of module creation, but this list **MUST** be accompanied by a disclaimer with the date of last update, and **MUST** be open to additions by the module consumer.
 
 {{< /hint >}}
 
@@ -166,7 +167,7 @@ In Terraform, locks become part of the resource graph and suitable `depends_on` 
   {{< hint type=note >}}
   Please note that you will need to ensure that the User-Defined Types for [Role Assignments](#role-assignments) & [Locks](#resource-locks) also are present in your module file for this interface to work correctly.
   {{< /hint >}}
-  {{< expand "➕ Variant 1: A default service (`groupId`) can be assumed - e.g., for services that only have one private endpoint type)" "expand/collapse" >}}
+  {{< expand "➕ Variant 1: A default service (`groupId`) can be assumed - e.g., for services that only have one private endpoint type" "expand/collapse" >}}
   {{< include file="/static/includes/interfaces/int.pe.udt.schema1.bicep" language="bicep" options="linenos=false" >}}
   {{< /expand >}}
   {{< expand "➕ Variant 2: A default service (`groupId`) cannot be assumed - e.g., for services that have more than one private endpoint type, like a Storage Account (blob, file, etc.)" "expand/collapse" >}}
@@ -184,21 +185,16 @@ In Terraform, locks become part of the resource graph and suitable `depends_on` 
   {{< /tab >}}
 {{< /tabs >}}
 
-**Notes:**
-
 {{< hint type=danger >}}
-REVIEW.
-Proposal:
-
-- keep
-- change the contact group to the repo maintaner.
-- owners SHOULD define list of allowed values for groupIds, but keep it open for additions by consumers
+Variations from the upstream: changed MAY to SHOULD for the 'groupIds' property
 {{< /hint >}}
+
+**Notes:**
 
 - The properties defined in the schema above are the minimum amount of properties expected to be exposed for Private Endpoints in AVM Resource Modules.
   - A module owner **MAY** chose to expose additional properties of the Private Endpoint resource
-    - However, module owners considering this **SHOULD** contact the AVM core team first to consult on how the property should be exposed to avoid future breaking changes to the schema that may be enforced upon them
-- Module owners **MAY** chose to define a list of allowed value for the 'service' (a.k.a. `groupIds`) property
+    - However, module owners considering this **SHOULD** contact the Core team first to consult on how the property should be exposed to avoid future breaking changes to the schema that may be enforced upon them
+- Module owners **SHOULD** define a list of allowed value for the 'service' (a.k.a. `groupIds`) property
   - However, they should do so with caution as should a new service appear for their resource module, a new release will need to be cut to add this new service to the allowed values
     - Whereas not specifying allowed values will allow flexibility from day 0 without the need for any changes and releases to be made
 
@@ -225,16 +221,8 @@ Proposal:
 
 ## Azure Monitor Alerts
 
-{{< hint type=danger >}}
-REVIEW.
-Proposal:
-
-- keep
-- change the contact group to the repo maintaner
-{{< /hint >}}
-
 {{< hint type=note >}}
 
-This interface is a **SHOULD** instead of a **MUST** and therefore the AVM core team have not mandated a interface schema to use.
+This interface is a **SHOULD** instead of a **MUST** and therefore the Core team have not mandated a interface schema to use.
 
 {{< /hint >}}

@@ -1,5 +1,5 @@
 baseURL = "https://azure.github.io/Azure-Verified-Modules"
-title = "Azure Verified Modules"
+title = "Azure Verified Modules (Community Fork)"
 theme = "hugo-geekdoc"
 
 # Required to get well formatted code blocks
